@@ -1,0 +1,48 @@
+﻿@model UserStatsViewModel
+@{
+    ViewData["Title"] = "UserStats";
+    var i = 0;
+}
+
+<h1>User Name: @Model.User.Name</h1>
+<span>User lives in: @Model.User.Address.ToString()</span>
+<br />
+<span>User Selling @Model.TotalCountForSell amounting to @Model.TotalValueForSell</span>
+<br />
+<span>User Buying @Model.TotalCountForBuy amounting to @Model.TotalValueForBuy</span>
+<br />
+
+<span>User Operations:</span>
+<table id="table" class="text-center table table-striped">
+    <thead class="thead-light">
+    <th scope="col">#</th>
+    <th scope="col">Item</th>
+    <th scope="col">Item Categories</th>
+    <th scope="col">Item Count</th>
+    <th scope="col">Value</th>
+    <th scope="col">Buying User</th>
+    <th scope="col">Selling User</th>
+    </thead>
+
+    <tbody>
+        @foreach (var operation in Model.Operations)
+        {
+            i++;
+            <tr>
+                <td>@i</td>
+                <td>@operation.Item?.Name</td>
+                <td>@String.Join(", ", operation.Item?.Categories.Select(i => i.Name).ToArray())</td>
+                <td>@operation.ItemCount</td>
+                <td>@operation.Value</td>
+                <td>@(operation.BuyingUser?.Name + " (" + operation.BuyingUser?.UserType.ToString() + ")")</td>
+                <td>@(operation.SellingUser?.Name + " (" + operation.SellingUser?.UserType.ToString() + ")")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button type="button" class="btn btn-primary float-right" onClick="history.go(-1); return false;">
+    Return
+</button>
+
+

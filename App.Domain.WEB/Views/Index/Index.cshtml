@@ -1,0 +1,12 @@
+@model IList<string>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="align-items-center">
+    <ul class="list-group">
+        @foreach(var item in Model){
+        <li class="list-group-item">@item</li>
+    }
+    </ul>
+</div>

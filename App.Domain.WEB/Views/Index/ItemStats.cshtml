@@ -1,0 +1,41 @@
+﻿@model ItemStatsViewModel
+@{
+    ViewData["Title"] = "ItemStats";
+}
+<h1>Item: @Model.Item.Name</h1>
+@if (Model.Item.TotalAmount != 0)
+{
+    <span>
+        Selling @Model.Item.TotalAmount amounting to @Model.Item.TotalAmount
+    </span>
+    <br />
+    <span>The Most Popular Buying City: @Model.MostPopularCityToBuy.Country, @Model.MostPopularCityToBuy.City</span>
+    <br />
+    <span>The Most Popular Selling City: @Model.MostPopularCityToSell.Country, @Model.MostPopularCityToSell.City </span>
+    <br />
+
+}
+else
+{
+    <span>Item is not selling in any city</span>
+    <br />
+}
+
+Has @Model.Item.Categories.Count Categories:
+<div class="align-items-center">
+    <ul class="list-group">
+        @foreach (var cat in Model.Item.Categories)
+        {
+            <li>@cat.Name</li>
+        }
+    </ul>
+</div>
+
+<button type="button" class="btn btn-primary float-right" onClick="history.go(-1); return false;">
+    Return
+</button>
+
+
+
+
+

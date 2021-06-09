@@ -1,0 +1,351 @@
+﻿@model PaginatedList<UserViewModel>
+@{
+    ViewData["Title"] = "Users";
+    int i = 0;
+}
+
+@*<input class="form-control my-2" type="text" id="search" placeholder="Search" />*@
+
+<form asp-action="Users" method="get">
+    <div class="form-row my-2">
+
+        <div class="form-col mx-2">
+            <input id="nameFilter" class="form-control" type="text" name="nameFilter" placeholder="User name" value="@ViewData["NameFilter"]" />
+        </div>
+
+        <div class="form-col mr-2">
+            <select id="typeFilter" class="form-control" name="typeFilter">
+                <option value="">Select User Type</option>
+                @foreach (var type in ViewData["UserTypes"] as IEnumerable<string>)
+                {
+                    @if ((ViewData["UserTypeFilter"] as string).Contains(type))
+                    {
+                        <option value="@type" selected>@type</option>
+                    }
+                    else
+                    {
+                        <option value="@type">@type</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-col mx-2">
+            <input id="addressFilter" class="form-control" type="text" name="addressFilter" placeholder="User Address" value="@ViewData["AddressFilter"] " />
+        </div>
+
+        <div class="form-col mr-2">
+            <input id="pageSize" class="form-control" type="number" name="pageSize" placeholder="Page Size" min="5" value="@Model.PageSize" />
+        </div>
+
+        <div class="form-col">
+            <input type="submit" value="Search" class="btn btn-outline-dark" />
+        </div>
+        <div class="form-col mx-2">
+            <a asp-action="Users" class="btn btn-outline-danger">Clear filters</a>
+        </div>
+    </div>
+</form>
+
+
+<table id="table" class="text-center table table-striped">
+    <thead class="thead-light">
+    <th scope="col"><a asp-action="Users" 
+                       asp-route-sortOrder="@ViewData["IdSortParam"]"
+                       asp-route-pageIndex="@(Model.PageIndex)"
+                       asp-route-nameFilter="@ViewData["NameFilter"]"
+                       asp-route-typeFilter="@ViewData["UserTypeFilter"]"
+                       asp-route-addressFilter="@ViewData["AddressFilter"]"
+                       asp-route-pageSize="@Model.PageSize">
+        #</a>
+    </th>
+    <th scope="col"><a asp-action="Users" 
+                       asp-route-sortOrder="@ViewData["NameSortParam"]"
+                       asp-route-pageIndex="@(Model.PageIndex)"
+                       asp-route-nameFilter="@ViewData["NameFilter"]"
+                       asp-route-typeFilter="@ViewData["UserTypeFilter"]"
+                       asp-route-addressFilter="@ViewData["AddressFilter"]"
+                       asp-route-pageSize="@Model.PageSize">
+        Name</a>
+    </th>
+    <th scope="col"><a asp-action="Users" 
+                       asp-route-sortOrder="@ViewData["UserTypeSortParam"]"
+                       asp-route-pageIndex="@(Model.PageIndex)"
+                       asp-route-nameFilter="@ViewData["NameFilter"]"
+                       asp-route-typeFilter="@ViewData["UserTypeFilter"]"
+                       asp-route-addressFilter="@ViewData["AddressFilter"]"
+                       asp-route-pageSize="@Model.PageSize">
+        User Type</a>
+    </th>
+    <th scope="col"><a asp-action="Users" 
+                       asp-route-sortOrder="@ViewData["AddressSortParam"]"
+                       asp-route-pageIndex="@(Model.PageIndex)"
+                       asp-route-nameFilter="@ViewData["NameFilter"]"
+                       asp-route-typeFilter="@ViewData["UserTypeFilter"]"
+                       asp-route-addressFilter="@ViewData["AddressFilter"]"
+                       asp-route-pageSize="@Model.PageSize">
+        User Address</a>
+    </th>
+    <th scope="col">Action</th>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            i++;
+            <tr>
+                <td>@i</td>
+                <td>@user.Name</td>
+                <td>@user.UserType</td>
+                <td>@user.Address.ToString()</td>
+                <td>
+                    <button type="button" class="fill-modal btn btn-outline-primary" data-toggle="modal" value="@user.Id" data-target="#addingModal">
+                        Edit
+                    </button>
+
+                    <a class="btn btn-outline-info" asp-controller="Index" asp-action="UserStats" asp-route-id="@user.Id">
+                        Details
+                    </a>
+
+                    <a href="~/User/RemoveUser/?id=@user.Id" class="btn btn-outline-danger">
+                        Remove
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="float-right">
+    <button type="button" class="clear-modal btn btn-primary" data-toggle="modal" data-target="#addingModal">
+        Add New User
+    </button>
+    <a asp-route-download="true"
+       class="btn btn-outline-primary">
+        Download As ExcelFile
+    </a>
+</div>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<div class="container">
+    <div class="row">
+        <a asp-action="Users"
+           asp-route-sortOrder="@ViewData["SortOrder"]"
+           asp-route-pageIndex="@(Model.PageIndex - 1)"
+           asp-route-nameFilter="@ViewData["NameFilter"]"
+           asp-route-typeFilter="@ViewData["UserTypeFilter"]"
+           asp-route-addressFilter="@ViewData["AddressFilter"]"
+           asp-route-pageSize="@Model.PageSize"
+           class="btn btn-outline-dark @prevDisabled">
+            Previous
+        </a>
+
+        <div class="border border-dark rounded input text-justify px-2 mx-2"><span class="align-middle">Page Index: @Model.PageIndex</span></div>
+
+        <a asp-action="Users"
+           asp-route-sortOrder="@ViewData["SortOrder"]"
+           asp-route-pageIndex="@(Model.PageIndex + 1)"
+           asp-route-nameFilter="@ViewData["NameFilter"]"
+           asp-route-typeFilter="@ViewData["UserTypeFilter"]"
+           asp-route-addressFilter="@ViewData["AddressFilter"]"
+           asp-route-pageSize="@Model.PageSize"
+           class="btn btn-outline-dark @nextDisabled">
+            Next
+        </a>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addingModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form class="needs-validation" method="post" novalidate>
+                <div class="modal-body">
+                    <label for="Name" class="col-form-label float-left">User Name:</label>
+                    <input id="Name" name="Name" type="text" class="form-control" placeholder="User Name" required />
+                    <div class="float-left invalid-feedback">Please provide an user name.</div>
+
+                    <select id="Country" name="Country" class="form-control my-5" required>
+                        @foreach (var type in ViewData["AllCountries"] as IEnumerable<string>)
+                        {
+                            <option value="@type">@type</option>
+                        }
+                    </select>
+
+                    <select id="City" name="City" class="form-control mb-5" required>
+                        @foreach (var type in ViewData["AllCities"] as IEnumerable<string>)
+                        {
+                            <option value="@type">@type</option>
+                        }
+                    </select>
+
+                    <select id="Street" name="Street" class="form-control mb-5" required>
+                        @foreach (var type in ViewData["AllStreets"] as IEnumerable<string>)
+                        {
+                            <option value="@type">@type</option>
+                        }
+                    </select>
+
+                    <select id="Building" name="Building" class="form-control mb-5" required>
+                        @foreach (var type in ViewData["AllBuildings"] as IEnumerable<string>)
+                        {
+                            <option value="@type">@type</option>
+                        }
+                    </select>
+                    <div class="float-left invalid-feedback">Please provide an address.</div>
+
+                    <label for="UserType" class="form-label">User Type:</label>
+                    <select id="UserType" name="UserType" class="form-control">
+
+                        @foreach (var type in ViewData["UserTypes"] as IEnumerable<string>)
+                        {
+                            <option value="@type">@type</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="modal-footer form-check">
+                    <button type="submit" id="Id" class="btn btn-primary" name="Id">Edit User</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#Country').select2({
+            allowClear: true,
+            tags: true,
+            theme: 'bootstrap4',
+            dropdownParent: $('#addingModal'),
+            placeholder: "Select Country"
+        });
+
+        $('#City').select2({
+            allowClear: true,
+            tags: true,
+            theme: 'bootstrap4',
+            dropdownParent: $('#addingModal'),
+            placeholder: "Select City"
+        });
+
+        $('#Street').select2({
+            allowClear: true,
+            tags: true,
+            theme: 'bootstrap4',
+            dropdownParent: $('#addingModal'),
+            placeholder: "Select Street"
+        });
+
+        $('#Building').select2({
+            allowClear: true,
+            tags: true,
+            theme: 'bootstrap4',
+            dropdownParent: $('#addingModal'),
+            placeholder: "Select Building"
+        });
+
+        $('#Building').next(".select2-container").hide()
+        $('#Street').next(".select2-container").hide()
+        $('#City').next(".select2-container").hide()
+    });
+
+    $('#Country').change(function () {
+        if ($(this).val() == "") {
+            $('#Building').next(".select2-container").hide()
+            $('#Street').next(".select2-container").hide()
+            $('#City').next(".select2-container").hide()
+        } else {
+            $('#City').next(".select2-container").show()
+        }
+    });
+
+    $('#City').change(function () {
+        if ($(this).val() == "") {
+            $('#Building').next(".select2-container").hide()
+            $('#Street').next(".select2-container").hide()
+         } else {
+            $('#Street').next(".select2-container").show()
+        }
+    });
+
+    $('#Street').change(function () {
+        if ($(this).val() == "") {
+            $('#Building').next(".select2-container").hide()
+        } else {
+            $('#Building').next(".select2-container").show()
+        }
+    });
+
+    $('.fill-modal').click(function () {
+        var $row = $(this).closest("tr");
+        $('#Name').val($row.children("td:nth-child(2)").text().trim());
+        $('#Id').val(parseInt($(this).val()));
+        $('#UserType').val($row.children("td:nth-child(3)").text().trim());
+
+        $('#Building').next(".select2-container").show()
+        $('#Street').next(".select2-container").show()
+        $('#City').next(".select2-container").show()
+
+        $('#Country').val($row.children("td:nth-child(4)").text().trim().split(", ",4 )[0].trim()).trigger('change');
+        $('#City').val($row.children("td:nth-child(4)").text().trim().split(", ", 4)[1].trim()).trigger('change');
+        $('#Street').val($row.children("td:nth-child(4)").text().trim().split(", ", 4)[2].trim()).trigger('change');
+        $('#Building').val($row.children("td:nth-child(4)").text().trim().split(", ", 4)[3].trim()).trigger('change');
+
+        console.log($row.children("td:nth-child(4)").text().trim().split(", ", 4)[0].trim());
+        console.log($row.children("td:nth-child(4)").text().trim().split(",  ", 4)[1].trim());
+        console.log($row.children("td:nth-child(4)").text().trim().split(", ", 4)[2].trim());
+        console.log($row.children("td:nth-child(4)").text().trim().split(", ", 4)[3].trim());
+    });
+
+    $('.clear-modal').click(function () {
+        $('#Name').val(null);
+        $('#Id').val(null);
+        $('#UserType').val(null);
+
+        $('#Country').val("").trigger('change');
+        $('#City').val("").trigger('change');
+        $('#Street').val("").trigger('change');
+        $('#Building').val("").trigger('change');
+
+        $('#Building').next(".select2-container").hide()
+        $('#Street').next(".select2-container").hide()
+        $('#City').next(".select2-container").hide()
+    });
+
+    $("#search").keyup(function () {
+        var searchText = $(this).val().toLowerCase();
+        // Show only matching TR, hide rest of them
+        $.each($("#table tbody tr"), function () {
+            if ($(this).text().toLowerCase().indexOf(searchText) === -1)
+                $(this).hide();
+            else
+                $(this).show();
+        });
+    });
+
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
