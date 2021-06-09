@@ -1,3 +1,4 @@
+@using System.Globalization
 @model PaginatedList<OperationViewModel>
 @{
     ViewData["Title"] = "Operations";
@@ -6,64 +7,105 @@
 
 @*<input class="form-control my-2" type="text" id="search" placeholder="Search" />*@
 
-<form asp-action="Operations" method="get">
-    <div class="form-row my-2">
-        <div class="form-col mx-2">
-            <select id="itemSelect" class="form-control" name="itemNameFilter" multiple>
-                @foreach (var item in ViewData["AllItems"] as List<ItemViewModel>)
-                {
-                    @if ((ViewData["ItemNameFilter"] as string[]).Contains(item.Name))
-                    {
-                        <option value="@item.Name" selected>@item.Name</option>
-                    }
-                    else
-                    {
-                        <option value="@item.Name">@item.Name</option>
-                    }
-                }
-            </select>
-        </div>
+<div class="container row">
+    <div class="col-8">
+        <form asp-action="Operations" method="get">
+            <div class="form-row my-2">
+                <div class="form-col mx-2">
+                    <select id="itemSelect" class="form-control" name="itemNameFilter" multiple>
+                        @foreach (var item in ViewData["AllItems"] as List<ItemViewModel>)
+                        {
+                            @if ((ViewData["ItemNameFilter"] as string[]).Contains(item.Name))
+                            {
+                                <option value="@item.Name" selected>@item.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
 
-        <div class="form-col mr-2">
-            <select id="catSelect" class="form-control" name="catFilter" multiple>
-                @foreach (var cat in ViewData["AllCats"] as List<CategoryViewModel>)
-                {
-                    @if ((ViewData["CatFilter"] as string[]).Contains(cat.Name))
-                    {
-                        <option value="@cat.Name" selected>@cat.Name</option>
-                    }
-                    else
-                    {
-                        <option value="@cat.Name">@cat.Name</option>
-                    }
-                }
-            </select>
-        </div>
+                <div class="form-col mr-2">
+                    <select id="catSelect" class="form-control" name="catFilter" multiple>
+                        @foreach (var cat in ViewData["AllCats"] as List<CategoryViewModel>)
+                        {
+                            @if ((ViewData["CatFilter"] as string[]).Contains(cat.Name))
+                            {
+                                <option value="@cat.Name" selected>@cat.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@cat.Name">@cat.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
 
-        <div class="form-col mr-2">
-            <input id="pageSize" class="form-control" type="number" name="pageSize" placeholder="Page Size" min="5" value="@Model.PageSize"/>
-        </div>
-    </div>
+                <div class="form-col mr-2">
+                    <input id="pageSize" class="form-control" type="number" name="pageSize" placeholder="Page Size" min="5" value="@Model.PageSize"/>
+                </div>
+            </div>
 
-    <div class="form-row mb-2">
-        <div class="form-col mx-2">
-            <input id="buyUsr" class="form-control" type="text" name="buyUsrNameFilter" placeholder="Buying User Name" value="@ViewData["BuyUserFilter"]"/>
-        </div>
+            <div class="form-row mb-2">
+                <div class="form-col mx-2">
+                    <input id="buyUsr" class="form-control" type="text" name="buyUsrNameFilter" placeholder="Buying User Name" value="@ViewData["BuyUserFilter"]"/>
+                </div>
 
-        <div class="form-col mr-2">
-            <input id="sellUsr" class="form-control" type="text" name="sellUsrNameFilter" placeholder="Selling User Name" value="@ViewData["SellUserFilter"]"/>
-        </div>
+                <div class="form-col mr-2">
+                    <input id="sellUsr" class="form-control" type="text" name="sellUsrNameFilter" placeholder="Selling User Name" value="@ViewData["SellUserFilter"]"/>
+                </div>
+            </div>
+
+            <div class="form-row mb-2">
+                <div class="form-col mx-2">
+                    <input id="MinValue" name="MinValue" type="number" step="0.01" min=0.01 value="@ViewData["MinVal"]" class="form-control" placeholder="Min Item Value"/>
+                </div>
+
+                <div class="form-col mr-2">
+                    <input id="MaxValue" name="MaxValue" type="number" step="0.01" min=0.01 value="@ViewData["MaxVal"]" class="form-control" placeholder="Max Item Value"/>
+                </div>
+            </div>
+
+            <div class="form-row mb-2">
+                <div class="form-col mx-2">
+                    <input id="MinAmount" name="MinAmount" type="number" min=0 value="@ViewData["MinAmount"]" class="form-control" placeholder="Min Item Count"/>
+                </div>
+
+                <div class="form-col mr-2">
+                    <input id="MaxAmount" name="MaxAmount" type="number" min=0 value="@ViewData["MaxAmount"]" class="form-control" placeholder="Max Item Count"/>
+                </div>
+            </div>
+
+            <div class="form-row mb-2">
+                <div class="form-col mx-2">
+                    <input id="StartDate" name="StartDate" type="date" value="@ViewData["StartDate"]" class="form-control" placeholder="From Date"/>
+                </div>
+
+                <div class="form-col mr-2">
+                    <input id="EndDate" name="EndDate" type="date" value="@ViewData["End Date"]" class="form-control" placeholder="To Date"/>
+                </div>
+            </div>
+
+
+            <div class="form-row mb-2">
+                <div class="form-col mx-2">
+                    <input type="submit" value="Search" class="btn btn-outline-dark"/>
+                </div>
+                <div class="form-col mx-2">
+                    <a asp-action="Operations" class="btn btn-outline-danger">Clear filters</a>
+                </div>
+            </div>
+        </form>
     </div>
     
-    <div class="form-row mb-2">
-        <div class="form-col mx-2">
-            <input type="submit" value="Search" class="btn btn-outline-dark"/>
-        </div>
-        <div class="form-col mx-2">
-            <a asp-action="Operations" class="btn btn-outline-danger">Clear filters</a>
-        </div>
+    <div class="col-4">
+        <div class="row py-5 lead">Total Selected Value: @ViewData["TotalValue"]</div>
+        <div class="row lead">Total Selected Amount: @ViewData["TotalAmount"]</div>
     </div>
-</form>
+</div>
+
 
 <table id="table" class="text-center table table-striped">
     <thead class="thead-light">
@@ -151,6 +193,19 @@
             Selling User
         </a>
     </th>
+    <th scope="col">
+            <a asp-action="Operations"
+               asp-route-sortOrder="@ViewData["DateSortParam"]"
+               asp-route-pageIndex="@(Model.PageIndex)"
+               asp-route-itemNameFilter="@(string.Join(",", (ViewData["ItemNameFilter"] as string[])))"
+               asp-route-catFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
+               asp-route-sellUsrNameFilter="@ViewData["SellUserFilter"]"
+               asp-route-buyUsrNameFilter="@ViewData["BuyUserFilter"]"
+               asp-route-pageSize="@Model.PageSize">
+                Date
+            </a>
+        </th>
+        
     <th scope="col">Action</th>
     </thead>
 
@@ -166,6 +221,7 @@
             <td>@operation.Value</td>
             <td>@(operation.BuyingUser?.Name + " (" + operation.BuyingUser?.UserType.ToString() + ")")</td>
             <td>@(operation.SellingUser?.Name + " (" + operation.SellingUser?.UserType.ToString() + ")")</td>
+            <td>@operation.SellingDate.ToString("d", CultureInfo.CreateSpecificCulture("ru-RU"))</td>
             <td>
                 <button type="button" class="fill-modal btn btn-outline-primary" data-toggle="modal" value="@operation.Id" data-target="#addingModal">
                     Edit
@@ -265,6 +321,9 @@
                             <option value="@user.Id">@(user.Name + " (" + user.UserType + ")")</option>
                         }
                     </select>
+                    
+                    <label for="SellingDate" class="form-label">Date:</label>
+                    <input id="SellingDate" name="SellingDate" class="form-control" type="date" required>
 
                 </div>
 
@@ -300,6 +359,9 @@
         $('#Id').val(parseInt($(this).val()));
         $('#ItemCount').val($row.children("td:nth-child(4)").text().trim());
         $('#Value').val($row.children("td:nth-child(5)").text().trim());
+        
+        const dateArr = $row.children("td:nth-child(8)").text().split('.')
+        $('#SellingDate').val(dateArr[2] + '-' + dateArr[1] + '-' + dateArr[0])
 
         $("#operationItem option:contains('" + $row.children('td:nth-child(2)').text().trim() + "')")
             .filter(function (i) {
@@ -327,6 +389,7 @@
         $('#Value').val(0.01);
         $('#BuyingUser').val(null);
         $('#SellingUser').val(null);
+        $('#SellingDate').val(null);
     });
 
     $("#search").keyup(function () {

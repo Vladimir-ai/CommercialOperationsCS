@@ -29,12 +29,9 @@ namespace App.Domain.WEB.Controllers
             _categoryService = categoryService;
         }
 
-        public IActionResult Items(string sortOrder, string nameFilter,
-            string[] catFilter, int pageSize, int? pageIndex,
-            float minVal = 0, float maxVal = float.MaxValue,
-            int minAmount = 0, int maxAmount = int.MaxValue)
+        public IActionResult Items(ItemFilterViewModel filterViewModel, 
+            int pageSize = 5, int pageIndex = 1)
         {
-            
             var categories = _categoryService.GetAll();
 
             var mapper = new MapperConfiguration(cfg =>
@@ -42,25 +39,20 @@ namespace App.Domain.WEB.Controllers
                 cfg.CreateMap<ItemDto, ItemViewModel>();
                 cfg.CreateMap<CategoryDto, CategoryViewModel>();
             }).CreateMapper();
-
-            nameFilter = nameFilter is null ? "" : nameFilter.Trim();
-            pageSize = pageSize > 5 ? pageSize : 5;
-            pageIndex = pageIndex.HasValue ? pageIndex : 1;
             
-            catFilter = catFilter is null || catFilter.Length == 0 ? Array.Empty<string>() :
-                catFilter.Length == 1 ? catFilter[0].Split(",") : catFilter;
-
-            ViewData["minVal"] = minVal == 0 ? null : minVal;
-            ViewData["maxVal"] = maxVal == float.MaxValue ? null : maxVal;
             
-            ViewData["minAmount"] = minAmount == 0 ? null : minAmount;
-            ViewData["maxAmount"] = maxAmount == int.MaxValue ? null : minAmount ;
+            ViewData["MinVal"] = filterViewModel.MinVal == 0 ? null : filterViewModel.MinVal;
+            ViewData["MaxVal"] = filterViewModel.MaxVal == float.MaxValue ? null : filterViewModel.MaxVal;
             
-            ViewData["CatFilter"] = catFilter;
-            ViewData["NameFilter"] = string.IsNullOrEmpty(nameFilter) ? "" : nameFilter;
+            ViewData["MinAmount"] = filterViewModel.MinAmount == 0 ? null : filterViewModel.MinAmount;
+            ViewData["MaxAmount"] = filterViewModel.MaxAmount == int.MaxValue ? null : filterViewModel.MaxAmount;
+            
+            ViewData["CatFilter"] = filterViewModel.CatFilter;
+            ViewData["NameFilter"] = filterViewModel.NameFilter;
 
             ViewData["Cats"] = mapper.Map<IEnumerable<CategoryDto>, List<CategoryViewModel>>(categories);
 
+            var sortOrder = filterViewModel.SortOrder;
             ViewData["SortOrder"] = sortOrder;
             ViewData["IdSortParam"] = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
             ViewData["NameSortParam"] = sortOrder == "Name" ? "name_desc" : "Name";
@@ -68,24 +60,19 @@ namespace App.Domain.WEB.Controllers
             ViewData["ValueSortParam"] = sortOrder == "Value" ? "val_desc" : "Value";
             ViewData["AmountSortParam"] = sortOrder == "Amount" ? "amount_desc" : "Amount";
 
-            var result = FilterResults(sortOrder, 
-                nameFilter, catFilter, minVal, 
-                maxVal, minAmount, maxAmount);
+            var result = FilterResults(filterViewModel);
 
             _logger.LogInformation(
-                $"Showing info for items: page={pageIndex} with size={pageSize}, category filter={String.Join(", ", catFilter)} and sortOrder={sortOrder}");
+                $"Showing info for items: page={pageIndex} with size={pageSize}, category filter=" +
+                        $"{String.Join(", ", filterViewModel.CatFilter)} and sortOrder={sortOrder}");
 
             return View(PaginatedList<ItemViewModel>
-                .CreateList(result.AsQueryable(), pageIndex.Value, pageSize));
+                .CreateList(result.AsQueryable(), pageIndex, pageSize));
         }
 
-        public IActionResult Download(string sortOrder,
-            string nameFilter, string[] catFilter,
-            float minVal = 0, float maxVal = float.MaxValue,
-            int minAmount = 0, int maxAmount = int.MaxValue)
+        public IActionResult Download(ItemFilterViewModel filterViewModel)
         {
-            var result = FilterResults(sortOrder,
-                nameFilter, catFilter, minVal, maxVal, minAmount, maxAmount);
+            var result = FilterResults(filterViewModel);
 
             using (var workbook = new XLWorkbook())
             {
@@ -137,10 +124,6 @@ namespace App.Domain.WEB.Controllers
 
         private List<ItemViewModel> FilterResults(ItemFilterViewModel filterViewModel)
         {
-            nameFilter = nameFilter is null ? "" : nameFilter.Trim();
-            catFilter = catFilter is null || catFilter.Length == 0 ? Array.Empty<string>() :
-                catFilter.Length == 1 ? catFilter[0].Split(",") : catFilter;
-
             var itemList = _itemService.GetAll();
 
             var mapper = new MapperConfiguration(cfg =>
@@ -157,39 +140,11 @@ namespace App.Domain.WEB.Controllers
                 it.TotalAmount = _itemService.GetTotalAmount(it.Id);
                 it.TotalValue = _itemService.GetTotalValue(it.Id);
             });
-            
-            result = sortOrder switch 
-            {
-                "id_desc" => result.AsQueryable().Reverse().ToList(), 
-                "Name" => result.OrderBy(r => r.Name).ToList(),
-                "name_desc" => result.OrderByDescending(r => r.Name).ToList(),
-                "Category" => result.OrderBy(r => r.Categories[0].Name).ToList(),
-                "cat_desc" => result.OrderByDescending(r  => r.Categories[0].Name).ToList(),
-                "Amount" => result.OrderBy(r => r.TotalAmount).ToList(),
-                "amount_desc" => result.OrderByDescending(r => r.TotalAmount).ToList(),
-                "Value" => result.OrderBy(r => r.TotalValue).ToList(),
-                "val_desc" => result.OrderByDescending(r => r.TotalValue).ToList(),
-                _ => result
-            };
 
-            if (!nameFilter.Equals(""))
-                result = result.FindAll(item => item.Name.Contains(nameFilter, StringComparison.OrdinalIgnoreCase));
 
-            if (catFilter.Length != 0)
-            {
-                result = result.Where(item => item.Categories
-                        .Select(cat => cat.Name)
-                        .Intersect(catFilter).Any())
-                        .ToList();
-            }
-
-            result = result
-                .Where(it => it.TotalAmount <= maxAmount && it.TotalAmount >= minAmount)
-                .ToList();
-
-            result = result
-                .Where(it => it.TotalValue <= maxVal && it.TotalValue >= minVal)
-                .ToList();
+            filterViewModel.SortUsingOrder(ref result);
+            filterViewModel.FilterByValue(ref result);
+            filterViewModel.FilterByAmount(ref result);
             
             return result;
         }

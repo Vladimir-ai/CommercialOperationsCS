@@ -1,3 +1,5 @@
+using System;
+
 namespace App.Domain.WEB.Models
 {
     public class OperationViewModel
@@ -8,5 +10,6 @@ namespace App.Domain.WEB.Models
         public int ItemCount { get; set; }
         public float Value { get; set; }
         public ItemViewModel Item { get; set; }
+        public DateTime SellingDate { get; set; }
     }
 }

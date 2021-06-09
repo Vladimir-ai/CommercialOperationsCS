@@ -35,16 +35,9 @@ namespace App.Domain.WEB.Controllers
             _categoryService = categoryService;
         }
 
-        public IActionResult Operations(string sortOrder, 
-            string[] itemNameFilter, string[] catFilter, 
-            string sellUsrNameFilter, string buyUsrNameFilter,
-            bool group, int pageSize = 5, int pageIndex = 1,
-            int minAmount = 0, int maxAmount = int.MaxValue,
-            float minValue = 0, float maxValue = float.MaxValue,
-            DateTime? startDate = null, DateTime? endDate = null)
+        public IActionResult Operations(OperationFilterViewModel filterViewModel,
+            int pageSize = 5, int pageIndex = 1)
         {
-            var res = _operationService.GetAll();
-
             var mapper = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<OperationDto, OperationViewModel>();
@@ -57,109 +50,44 @@ namespace App.Domain.WEB.Controllers
             ViewData["AllCats"] = mapper.Map<IEnumerable<CategoryDto>, List<CategoryViewModel>>(_categoryService.GetAll());
             ViewData["AllItems"] = mapper.Map<IEnumerable<ItemDto>, List<ItemViewModel>>(_itemService.GetAll());
             
-            var result = mapper.Map<IEnumerable<OperationDto>, List<OperationViewModel>>(res);
+            ViewData["SortOrder"] = filterViewModel.SortOrder;
+            ViewData["IdSortParam"] = String.IsNullOrEmpty(filterViewModel.SortOrder) ? "id_desc" : "";
+            ViewData["ItemNameSortParam"] = filterViewModel.SortOrder == "ItemName" ? "name_desc" : "ItemName";
+            ViewData["ItemCatSortParam"] = filterViewModel.SortOrder == "ItemCat" ? "cat_name_desc" : "ItemCat";
+            ViewData["ItemCountSortParam"] = filterViewModel.SortOrder == "ItemCount" ? "count_desc" : "ItemCount";
+            ViewData["ItemValueSortParam"] = filterViewModel.SortOrder == "ItemValue" ? "value_desc" : "ItemValue";
+            ViewData["BuyUserSortParam"] = filterViewModel.SortOrder == "BuyUser" ? "buy_usr_desc" : "BuyUser";
+            ViewData["SellUserSortParam"] = filterViewModel.SortOrder == "SellUser" ? "sell_usr_desc" : "SellUser";
+            ViewData["DateSortParam"] = filterViewModel.SortOrder == "Date" ? "date_desc" : "Date";
 
+            ViewData["ItemNameFilter"] = filterViewModel.ItemNameFilter;
+            ViewData["CatFilter"] = filterViewModel.CatFilter;
+            ViewData["BuyUserFilter"] = filterViewModel.BuyUsrNameFilter;
+            ViewData["SellUserFilter"] = filterViewModel.SellUsrNameFilter;
+
+            ViewData["MinVal"] = filterViewModel.MinValue == 0 ? null : filterViewModel.MinValue;
+            ViewData["MaxVal"] = filterViewModel.MaxValue == float.MaxValue ? null : filterViewModel.MaxValue;
+
+            ViewData["MinAmount"] = filterViewModel.MinAmount == 0 ? null : filterViewModel.MinAmount;
+            ViewData["MaxAmount"] = filterViewModel.MaxAmount == int.MaxValue ? null : filterViewModel.MaxAmount;
+
+            ViewData["StartDate"] = filterViewModel.StartDate == DateTime.MinValue ? null : filterViewModel.StartDate;
+            ViewData["EndDate"] = filterViewModel.EndDate == DateTime.MaxValue ? null : filterViewModel.EndDate;
+
+            var result = FilterResults(filterViewModel);
+
+            ViewData["TotalAmount"] = result.Select(it => it.ItemCount).Sum();
+            ViewData["TotalValue"] = result.Select(it => it.Value).Sum();
             
-            catFilter = catFilter is null || catFilter.Length == 0 ? 
-                Array.Empty<string>() : catFilter.Length == 1 ? 
-                    catFilter[0].Split(",") : catFilter;
+            _logger.LogInformation($"Viewing info about all operations: pageIndex={pageIndex} with pageSize={pageSize}");
             
+            return View(PaginatedList<OperationViewModel>.CreateList(result.AsQueryable(), pageIndex, pageSize));
+        }
+
+        public IActionResult Download(OperationFilterViewModel filter)//TODO
+        {
+            var result = FilterResults(filter);
             
-            itemNameFilter = itemNameFilter is null || itemNameFilter.Length == 0 ? 
-                Array.Empty<string>() : itemNameFilter.Length == 1 ?
-                    itemNameFilter[0].Split(",") : itemNameFilter;
-
-
-            ViewData["SortOrder"] = sortOrder;
-            ViewData["IdSortParam"] = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
-            ViewData["ItemNameSortParam"] = sortOrder == "ItemName" ? "name_desc" : "ItemName";
-            ViewData["ItemCatSortParam"] = sortOrder == "ItemCat" ? "cat_name_desc" : "ItemCat";
-            ViewData["ItemCountSortParam"] = sortOrder == "ItemCount" ? "count_desc" : "ItemCount";
-            ViewData["ItemValueSortParam"] = sortOrder == "ItemValue" ? "value_desc" : "ItemValue";
-            ViewData["BuyUserSortParam"] = sortOrder == "BuyUser" ? "buy_usr_desc" : "BuyUser";
-            ViewData["SellUserSortParam"] = sortOrder == "SellUser" ? "buy_usr_desc" : "SellUser";
-
-            ViewData["ItemNameFilter"] = itemNameFilter is null ? Array.Empty<string>() : itemNameFilter;
-            ViewData["CatFilter"] = catFilter is null ? Array.Empty<string>() : catFilter;
-            ViewData["BuyUserFilter"] = String.IsNullOrEmpty(buyUsrNameFilter) ? "" : buyUsrNameFilter;
-            ViewData["SellUserFilter"] = String.IsNullOrEmpty(sellUsrNameFilter) ? "" : sellUsrNameFilter;
-            
-            switch (sortOrder)
-            {
-                case "id_desc":
-                    result.Reverse();
-                    break;
-
-                case "ItemName":
-                    result = result.OrderBy(r => r.Item.Name).ToList();
-                    break;
-
-                case "name_desc":
-                    result = result.OrderByDescending(r => r.Item.Name).ToList();
-                    break;
-
-                case "ItemCat":
-                    result = result.OrderBy(r => r.Item.Categories[0].Name).ToList();
-                    break;
-
-                case "cat_name_desc":
-                    result = result.OrderByDescending(r => r.Item.Categories[0].Name).ToList();
-                    break;
-
-                case "ItemCount":
-                    result = result.OrderBy(r => r.ItemCount).ToList();
-                    break;
-
-                case "count_desc":
-                    result = result.OrderByDescending(r => r.ItemCount).ToList();
-                    break;
-
-                case "ItemValue":
-                    result = result.OrderBy(r => r.Value).ToList();
-                    break;
-
-                case "value_desc":
-                    result = result.OrderByDescending(r => r.Value).ToList();
-                    break;
-
-                case "BuyUser":
-                    result = result.OrderBy(r => r.SellingUser.Name).ToList();
-                    break;
-
-                case "buy_usr_desc":
-                    result = result.OrderByDescending(r => r.SellingUser.Name).ToList();
-                    break;
-
-                case "SellUser":
-                    result = result.OrderBy(r => r.BuyingUser.Name).ToList();
-                    break;
-            }
-
-            if (itemNameFilter != null && itemNameFilter.Length != 0)
-            {
-                itemNameFilter = itemNameFilter[0].Split(",");
-                result = result.Where(oper => itemNameFilter.Contains(oper.Item.Name)).ToList();
-            }
-
-            if (buyUsrNameFilter != null && buyUsrNameFilter.Length != 0)
-                result = result.Where(oper => buyUsrNameFilter.Contains(oper.BuyingUser.Name)).ToList();
-
-            if (sellUsrNameFilter != null && sellUsrNameFilter.Length != 0)
-                result = result.Where(oper => sellUsrNameFilter.Contains(oper.SellingUser.Name)).ToList();
-
-            if (catFilter != null && catFilter.Length != 0)
-            {
-                catFilter = catFilter[0].Split(",");
-                result = result.Where(oper => oper.Item.Categories.Select(cat => cat.Name).Intersect(catFilter).Any()).ToList();
-            }
-
-            _logger.LogInformation($"Viewing info about all operations: pageIndex={pageIndex} with pageSize={pageSize}" +
-                $", sellUserNameFilter={sellUsrNameFilter}, buyUserNameFilter={buyUsrNameFilter}, " +
-                $"itemNameFilter={String.Join(", ", itemNameFilter)}, categoryFilter={String.Join(", ", catFilter)} and sortOrder={sortOrder}");
-
-
-            if (download)
-            {
                 using var workbook = new XLWorkbook();
 
                 _logger.LogInformation($"Saving xlsx file for operations");
@@ -201,16 +129,29 @@ namespace App.Domain.WEB.Controllers
                     workbook.SaveAs(stream);
                     return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Operations.xlsx");
                 }
-            }
-
-
-            return View(PaginatedList<OperationViewModel>.CreateList(result.AsQueryable(), pageIndex.Value, pageSize));
         }
 
-
-        private List<OperationViewModel> FilterResults(OperationFilterViewModel filter, int pageSize = 5, int pageIndex = 1)
+        private List<OperationViewModel> FilterResults(OperationFilterViewModel filter)
         {
+            var res = _operationService.GetAll();
+
+            var mapper = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<OperationDto, OperationViewModel>();
+                cfg.CreateMap<ItemDto, ItemViewModel>();
+                cfg.CreateMap<CategoryDto, CategoryViewModel>();
+                cfg.CreateMap<UserDto, UserViewModel>().ForMember(dst => dst.Address, src => src.Ignore());
+            }).CreateMapper();
+
+            var result = mapper.Map<IEnumerable<OperationDto>, List<OperationViewModel>>(res);
             
+            filter.SortByAmount(ref result);
+            filter.SortByCatUsr(ref result);
+            filter.SortUsingOrder(ref result);
+            
+            
+            
+            return result;
         }
         
         [HttpPost]

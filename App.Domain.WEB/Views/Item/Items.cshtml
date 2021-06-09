@@ -7,7 +7,7 @@
 <form asp-action="Items" method="get">
     <div class="form-row mx-2 my-2">
         <div class="form-col mr-2">
-            <select id="categorySelect" class="form-control" name="catFilter" multiple>
+            <select id="categorySelect" class="form-control" name="CatFilter" multiple>
                 @foreach (var cat in ViewData["Cats"] as List<CategoryViewModel>)
                 {
                     @if ((ViewData["CatFilter"] as string[]).Contains(cat.Name))
@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-col mr-2">
-            <input id="nameFilter" class="form-control" type="text" name="nameFilter" placeholder="Item Name" value="@ViewData["NameFilter"]"/>
+            <input id="NameFilter" class="form-control" type="text" name="NameFilter" placeholder="Item Name" value="@ViewData["NameFilter"]"/>
         </div>
 
         <div class="form-col mr-2">
@@ -32,21 +32,21 @@
     </div>
     <div class="form-row mx-2 mb-2">
         <div class="form-col mr-2">
-            <input id="minValue" name="minVal" type="number" step="0.01" min=0.01 value="@ViewData["minVal"]" class="form-control" placeholder="Min Item Value"/>
+            <input id="MinValue" name="MinVal" type="number" step="0.01" min=0.01 value="@ViewData["MinVal"]" class="form-control" placeholder="Min Item Value"/>
         </div>
 
         <div class="form-col mr-2">
-            <input id="maxValue" name="maxVal" type="number" step="0.01" min=0.01 value="@ViewData["maxVal"]" class="form-control" placeholder="Max Item Value"/>
+            <input id="MaxValue" name="MaxVal" type="number" step="0.01" min=0.01 value="@ViewData["MaxVal"]" class="form-control" placeholder="Max Item Value"/>
         </div>
     </div>
-    
+
     <div class="form-row mx-2 mb-2">
         <div class="form-col mr-2">
-            <input id="minAmount" name="minAmount" type="number" min=0 value="@ViewData["minAmount"]" class="form-control" placeholder="Min Item Count"/>
+            <input id="MinAmount" name="MinAmount" type="number" min=0 value="@ViewData["MinAmount"]" class="form-control" placeholder="Min Item Count"/>
         </div>
 
         <div class="form-col mr-2">
-            <input id="maxAmount" name="maxAmount" type="number" min=0 value="@ViewData["maxAmount"]" class="form-control" placeholder="Max Item Count"/>
+            <input id="MaxAmount" name="MaxAmount" type="number" min=0 value="@ViewData["MaxAmount"]" class="form-control" placeholder="Max Item Count"/>
         </div>
     </div>
 
@@ -67,12 +67,12 @@
             <a asp-action="Items"
                asp-route-sortOrder="@ViewData["IdSortParam"]"
                asp-route-pageIndex="@(Model.PageIndex)"
-               asp-route-nameFilter="@ViewData["NameFilter"]"
-               asp-route-catFilter="@(string.Join(",", (ViewData["catFilter"] as string[])))"
-               asp-route-maxAmount="@ViewData["maxAmount"]"
-                              asp-route-maxVal="@ViewData["maxVal"]"
-                              asp-route-minVal="@ViewData["minVal"]"
-                              asp-route-minAmount="@ViewData["minAmount"]"
+               asp-route-NameFilter="@ViewData["NameFilter"]"
+               asp-route-CatFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
+               asp-route-MaxAmount="@ViewData["MaxAmount"]"
+               asp-route-MaxVal="@ViewData["MaxVal"]"
+               asp-route-MinVal="@ViewData["MinVal"]"
+               asp-route-MinAmount="@ViewData["MinAmount"]"
                asp-route-pageSize="@Model.PageSize">
                 #
             </a>
@@ -81,12 +81,12 @@
             <a asp-action="Items"
                asp-route-sortOrder="@ViewData["NameSortParam"]"
                asp-route-pageIndex="@(Model.PageIndex)"
-               asp-route-nameFilter="@ViewData["NameFilter"]"
-               asp-route-catFilter="@(string.Join(",", (ViewData["catFilter"] as string[])))"
-               asp-route-maxAmount="@ViewData["maxAmount"]"
-               asp-route-maxVal="@ViewData["maxVal"]"
-               asp-route-minVal="@ViewData["minVal"]"
-               asp-route-minAmount="@ViewData["minAmount"]"
+               asp-route-NameFilter="@ViewData["NameFilter"]"
+               asp-route-CatFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
+               asp-route-MaxAmount="@ViewData["MaxAmount"]"
+               asp-route-MaxVal="@ViewData["MaxVal"]"
+               asp-route-MinVal="@ViewData["MinVal"]"
+               asp-route-MinAmount="@ViewData["MinAmount"]"
                asp-route-pageSize="@Model.PageSize">
                 Name
             </a>
@@ -95,12 +95,12 @@
             <a asp-action="Items"
                asp-route-sortOrder="@ViewData["CatNameSortParam"]"
                asp-route-pageIndex="@(Model.PageIndex)"
-               asp-route-nameFilter="@ViewData["NameFilter"]"
-               asp-route-catFilter="@(string.Join(",", (ViewData["catFilter"] as string[])))"
-               asp-route-maxAmount="@ViewData["maxAmount"]"
-                              asp-route-maxVal="@ViewData["maxVal"]"
-                              asp-route-minVal="@ViewData["minVal"]"
-                              asp-route-minAmount="@ViewData["minAmount"]"
+               asp-route-NameFilter="@ViewData["NameFilter"]"
+               asp-route-CatFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
+               asp-route-MaxAmount="@ViewData["MaxAmount"]"
+               asp-route-MaxVal="@ViewData["MaxVal"]"
+               asp-route-MinVal="@ViewData["MinVal"]"
+               asp-route-MinAmount="@ViewData["MinAmount"]"
                asp-route-pageSize="@Model.PageSize">
                 Categories
             </a>
@@ -109,12 +109,12 @@
             <a asp-action="Items"
                asp-route-sortOrder="@ViewData["AmountSortParam"]"
                asp-route-pageIndex="@(Model.PageIndex)"
-               asp-route-nameFilter="@ViewData["NameFilter"]"
-               asp-route-catFilter="@(string.Join(",", (ViewData["catFilter"] as string[])))"
-               asp-route-maxAmount="@ViewData["maxAmount"]"
-                              asp-route-maxVal="@ViewData["maxVal"]"
-                              asp-route-minVal="@ViewData["minVal"]"
-                              asp-route-minAmount="@ViewData["minAmount"]"
+               asp-route-NameFilter="@ViewData["NameFilter"]"
+               asp-route-CatFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
+               asp-route-MaxAmount="@ViewData["MaxAmount"]"
+               asp-route-MaxVal="@ViewData["MaxVal"]"
+               asp-route-MinVal="@ViewData["MinVal"]"
+               asp-route-MinAmount="@ViewData["MinAmount"]"
                asp-route-pageSize="@Model.PageSize">
                 Total Amount
             </a>
@@ -124,12 +124,12 @@
             <a asp-action="Items"
                asp-route-sortOrder="@ViewData["ValueSortParam"]"
                asp-route-pageIndex="@(Model.PageIndex)"
-               asp-route-nameFilter="@ViewData["NameFilter"]"
-               asp-route-catFilter="@(string.Join(",", (ViewData["catFilter"] as string[])))"
-               asp-route-maxAmount="@ViewData["maxAmount"]"
-                              asp-route-maxVal="@ViewData["maxVal"]"
-                              asp-route-minVal="@ViewData["minVal"]"
-               asp-route-minAmount="@ViewData["minAmount"]"
+               asp-route-NameFilter="@ViewData["NameFilter"]"
+               asp-route-CatFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
+               asp-route-MaxAmount="@ViewData["MaxAmount"]"
+               asp-route-MaxVal="@ViewData["MaxVal"]"
+               asp-route-MinVal="@ViewData["MinVal"]"
+               asp-route-MinAmount="@ViewData["MinAmount"]"
                asp-route-pageSize="@Model.PageSize">
                 Total Value
             </a>
@@ -185,12 +185,12 @@
 
     <a asp-action="Download"
        asp-route-sortOrder="@ViewData["SortOrder"]"
-       asp-route-nameFilter="@ViewData["NameFilter"]"
-       asp-route-maxAmount="@ViewData["maxAmount"]"
-                      asp-route-maxVal="@ViewData["maxVal"]"
-                      asp-route-minVal="@ViewData["minVal"]"
-                      asp-route-minAmount="@ViewData["minAmount"]"
-       asp-route-catFilter="@(string.Join(",", (ViewData["catFilter"] as string[])))"
+       asp-route-NameFilter="@ViewData["NameFilter"]"
+       asp-route-MaxAmount="@ViewData["MaxAmount"]"
+       asp-route-MaxVal="@ViewData["MaxVal"]"
+       asp-route-MinVal="@ViewData["MinVal"]"
+       asp-route-MinAmount="@ViewData["MinAmount"]"
+       asp-route-CatFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
 
        class="btn btn-outline-primary">
         Download As ExcelFile
@@ -207,12 +207,12 @@
         <a asp-action="Items"
            asp-route-sortOrder="@ViewData["SortOrder"]"
            asp-route-pageIndex="@(Model.PageIndex - 1)"
-           asp-route-nameFilter="@ViewData["NameFilter"]"
-           asp-route-catFilter="@(string.Join(",", (ViewData["catFilter"] as string[])))"
-           asp-route-maxAmount="@ViewData["maxAmount"]"
-                          asp-route-maxVal="@ViewData["maxVal"]"
-                          asp-route-minVal="@ViewData["minVal"]"
-                          asp-route-minAmount="@ViewData["minAmount"]"
+           asp-route-NameFilter="@ViewData["NameFilter"]"
+           asp-route-CatFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
+           asp-route-MaxAmount="@ViewData["MaxAmount"]"
+           asp-route-MaxVal="@ViewData["MaxVal"]"
+           asp-route-MinVal="@ViewData["MinVal"]"
+           asp-route-MinAmount="@ViewData["MinAmount"]"
            asp-route-pageSize="@Model.PageSize"
            class="btn btn-outline-dark @prevDisabled">
             Previous
@@ -225,13 +225,13 @@
         <a asp-action="Items"
            asp-route-sortOrder="@ViewData["SortOrder"]"
            asp-route-pageIndex="@(Model.PageIndex + 1)"
-           asp-route-nameFilter="@ViewData["NameFilter"]"
-           asp-route-catFilter="@(string.Join(",", (ViewData["catFilter"] as string[])))"
+           asp-route-NameFilter="@ViewData["NameFilter"]"
+           asp-route-CatFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
            asp-route-pageSize="@Model.PageSize"
-           asp-route-maxAmount="@ViewData["maxAmount"]"
-                          asp-route-maxVal="@ViewData["maxVal"]"
-                          asp-route-minVal="@ViewData["minVal"]"
-                          asp-route-minAmount="@ViewData["minAmount"]"
+           asp-route-MaxAmount="@ViewData["MaxAmount"]"
+           asp-route-MaxVal="@ViewData["MaxVal"]"
+           asp-route-MinVal="@ViewData["MinVal"]"
+           asp-route-MinAmount="@ViewData["MinAmount"]"
            class="btn btn-outline-dark @nextDisabled">
             Next
         </a>

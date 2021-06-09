@@ -10,7 +10,6 @@ namespace App.Domain.BLL.DTO
         public int ItemCount { get; set; }
         public float Value { get; set; }
         public ItemDto Item { get; set; }
-        
         public DateTime SellingDate { get; set; }
     }
 }
