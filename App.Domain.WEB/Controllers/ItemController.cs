@@ -60,8 +60,15 @@ namespace App.Domain.WEB.Controllers
             ViewData["ValueSortParam"] = sortOrder == "Value" ? "val_desc" : "Value";
             ViewData["AmountSortParam"] = sortOrder == "Amount" ? "amount_desc" : "Amount";
 
+            ViewData["StartDate"] = filterViewModel.StartDate == DateTime.MinValue ? "" : filterViewModel.StartDate.ToString("yyyy-MM-dd");
+            ViewData["EndDate"] = filterViewModel.EndDate == DateTime.MaxValue ? "" : filterViewModel.EndDate.ToString("yyyy-MM-dd");
+
+            
             var result = FilterResults(filterViewModel);
 
+            ViewData["TotalValue"] = result.Select(it => it.TotalValue).Sum();
+            ViewData["TotalAmount"] = result.Select(it => it.TotalAmount).Sum();
+            
             _logger.LogInformation(
                 $"Showing info for items: page={pageIndex} with size={pageSize}, category filter=" +
                         $"{String.Join(", ", filterViewModel.CatFilter)} and sortOrder={sortOrder}");
@@ -137,8 +144,11 @@ namespace App.Domain.WEB.Controllers
 
             result.ForEach(it =>
             {
-                it.TotalAmount = _itemService.GetTotalAmount(it.Id);
-                it.TotalValue = _itemService.GetTotalValue(it.Id);
+                it.TotalAmount = _itemService.GetTotalAmountWithinDate(it.Id, 
+                    filterViewModel.StartDate, filterViewModel.EndDate);
+                
+                it.TotalValue = _itemService.GetTotalValueWithinDate(it.Id, 
+                    filterViewModel.StartDate, filterViewModel.EndDate);
             });
 
 

@@ -22,43 +22,39 @@ namespace CommercialOperations
         {
             using (MyContext db = new MyContext(new DbContextOptions<MyContext>()))
             {
-                var userRepo = new Repository<User>(db);
-                var userTypeRepo = new Repository<UserType>(db);
-                var buildingRepo = new Repository<Building>(db);
-                var countyRepo = new Repository<Country>(db);
-                var operRepo = new Repository<Operation>(db);
+                Random random = new Random();
                 var itemRepo = new Repository<Item>(db);
+                var userRepo = new Repository<User>(db);
+                var opRepo = new Repository<Operation>(db);
 
-
-                var cat = new Category {Name = "aaa"};
-                var item = new Item {Name = "aaaItem"};
-                item.Categories.Add(cat);
-
-                var count = new Country {Name = "AAAA"};
-                var city = new City {Name = "BBBB", Country = count};
-                var street = new Street {Name = "CCCC", City = city};
-                var building = new Building {Name = "DDDD", Street = street};
-                var anotherBuilding = new Building {Name = "SSSS", Street = street};
-
-                var userType = new UserType {Type = "Homeless"};
-
-                buildingRepo.CreateOrUpdate(building);
-                buildingRepo.CreateOrUpdate(anotherBuilding);
-                userTypeRepo.CreateOrUpdate(userType);
-
-                var usr1 = new User {Building = building, Name = "AAAA", UserType = userType};
-                var usr2 = new User {Building = anotherBuilding, Name = "BBBB", UserType = userType};
-
-                var oper = new Operation
+                var allItems = itemRepo.GetAll();
+                var allUsers = userRepo.GetAll();
+                
+                for (int i = 0; i < 50; i++)
                 {
-                    BuyingUser = usr1, SellingUser = usr2, Item = item, ItemCount = 1, Value = 0.02f,
-                    SellingDate = DateTime.Now
-                };
+                    var sellingUser = allUsers[random.Next(allUsers.Count)];
+                    var buyingUser = allUsers[random.Next(allUsers.Count)];
+                    while (buyingUser.Id == sellingUser.Id)
+                    {
+                        buyingUser = allUsers[random.Next(allUsers.Count)];
+                    }
 
-                operRepo.CreateOrUpdate(oper);
-                //     userRepo.Delete(1);
-//                itemRepo.Delete(1);
+                    var item = allItems[random.Next(allItems.Count)];
 
+                    var price = 10000 - random.NextDouble() * 10000;
+                    var amount = random.Next(100);
+                    
+                    DateTime start = new DateTime(2010, 1, 1);
+                    int range = (DateTime.Today - start).Days;           
+                    var date = start.AddDays(random.Next(range));
+
+                    var operation = new Operation { BuyingUser = buyingUser, 
+                        SellingUser = sellingUser, Item = item, Value = (float) price,
+                        ItemCount = amount, SellingDate = date};
+                    
+                    opRepo.Create(operation);
+                }
+                
             }
 
             Console.WriteLine("ok");

@@ -101,6 +101,27 @@ namespace App.Domain.BLL.Services
                 .Select(it => it.Value).Sum() ?? 0;
         }
 
+
+        public int GetTotalAmountWithinDate(long id, DateTime startDate, DateTime endDate)
+        {
+            var item = _itemRepository.Find(id);
+
+            return item?.Operations
+                .Where(op => op.SellingDate <= endDate)
+                .Where(op => op.SellingDate >= startDate)
+                .Select(op => op.ItemCount).Sum() ?? 0;
+        }
+
+        public float GetTotalValueWithinDate(long id, DateTime startDate, DateTime endDate)
+        {
+            var item = _itemRepository.Find(id);
+
+            return item?.Operations
+                .Where(op => op.SellingDate <= endDate)
+                .Where(op => op.SellingDate >= startDate)
+                .Select(op => op.Value).Sum() ?? 0;
+        }
+
         public void Delete(long id)
         {
             var toDelete = _itemRepository.Find(id);
@@ -108,5 +129,7 @@ namespace App.Domain.BLL.Services
             if (toDelete is not null)
                 _itemRepository.Delete(id);
         }
+
+        
     }
 }

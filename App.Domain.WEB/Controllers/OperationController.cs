@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using AutoMapper;
 using System.IO;
@@ -49,6 +50,8 @@ namespace App.Domain.WEB.Controllers
             ViewData["AllUsers"] = mapper.Map<IEnumerable<UserDto>, List<UserViewModel>>(_userService.GetAll());
             ViewData["AllCats"] = mapper.Map<IEnumerable<CategoryDto>, List<CategoryViewModel>>(_categoryService.GetAll());
             ViewData["AllItems"] = mapper.Map<IEnumerable<ItemDto>, List<ItemViewModel>>(_itemService.GetAll());
+            //ViewData["AllGroups"] = new[] {"Buying User", "Selling User", "Item"};
+            
             
             ViewData["SortOrder"] = filterViewModel.SortOrder;
             ViewData["IdSortParam"] = String.IsNullOrEmpty(filterViewModel.SortOrder) ? "id_desc" : "";
@@ -60,6 +63,7 @@ namespace App.Domain.WEB.Controllers
             ViewData["SellUserSortParam"] = filterViewModel.SortOrder == "SellUser" ? "sell_usr_desc" : "SellUser";
             ViewData["DateSortParam"] = filterViewModel.SortOrder == "Date" ? "date_desc" : "Date";
 
+            
             ViewData["ItemNameFilter"] = filterViewModel.ItemNameFilter;
             ViewData["CatFilter"] = filterViewModel.CatFilter;
             ViewData["BuyUserFilter"] = filterViewModel.BuyUsrNameFilter;
@@ -71,9 +75,11 @@ namespace App.Domain.WEB.Controllers
             ViewData["MinAmount"] = filterViewModel.MinAmount == 0 ? null : filterViewModel.MinAmount;
             ViewData["MaxAmount"] = filterViewModel.MaxAmount == int.MaxValue ? null : filterViewModel.MaxAmount;
 
-            ViewData["StartDate"] = filterViewModel.StartDate == DateTime.MinValue ? null : filterViewModel.StartDate;
-            ViewData["EndDate"] = filterViewModel.EndDate == DateTime.MaxValue ? null : filterViewModel.EndDate;
+            ViewData["StartDate"] = filterViewModel.StartDate == DateTime.MinValue ? "" : filterViewModel.StartDate.ToString("yyyy-MM-dd");
+            ViewData["EndDate"] = filterViewModel.EndDate == DateTime.MaxValue ? "" : filterViewModel.EndDate.ToString("yyyy-MM-dd");
 
+            //ViewData["CurrGroup"] = filterViewModel.Group;
+            
             var result = FilterResults(filterViewModel);
 
             ViewData["TotalAmount"] = result.Select(it => it.ItemCount).Sum();
@@ -102,6 +108,10 @@ namespace App.Domain.WEB.Controllers
                 worksheet.Cell("G1").Value = "Selling User Type";
                 worksheet.Cell("H1").Value = "Buying User Name";
                 worksheet.Cell("I1").Value = "Buying User Type";
+                worksheet.Cell("J1").Value = "Operation Date";
+
+                worksheet.Cell("L1").Value = "Total Amount";
+                worksheet.Cell("M1").Value = "Total Value";
 
                 int row = 1;
                 foreach (var operation in result)
@@ -116,13 +126,18 @@ namespace App.Domain.WEB.Controllers
                     rowObj.Cell(7).Value = operation.SellingUser.UserType;
                     rowObj.Cell(8).Value = operation.BuyingUser.Name;
                     rowObj.Cell(9).Value = operation.BuyingUser.UserType;
+                    rowObj.Cell(10).Value = operation.SellingDate.ToString("d", CultureInfo.CreateSpecificCulture("ru-RU"));
                 }
 
+                worksheet.Cell("L2").FormulaA1 = $"=SUM($D$2:$D${row})";
+                worksheet.Cell("M2").FormulaA1 = $"=SUM($E$2:$E${row})";
+                
                 var cd = new System.Net.Mime.ContentDisposition
                 {
                     FileName = "Operations.xlsx",
                     Inline = false,
                 };
+
                 Response.Headers.Add("Content-Disposition", cd.ToString());
                 using (MemoryStream stream = new MemoryStream())
                 {

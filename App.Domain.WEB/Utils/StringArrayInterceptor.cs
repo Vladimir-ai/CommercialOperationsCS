@@ -15,7 +15,8 @@ namespace App.Domain.WEB.Utils
                 currValue = Array.Empty<string>();
 
             if (currValue.Length == 1)
-                currValue = currValue[0].Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                currValue = currValue[0].Split(",",
+                    StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
 
             args.Value = currValue;
             args.ProceedSetValue();

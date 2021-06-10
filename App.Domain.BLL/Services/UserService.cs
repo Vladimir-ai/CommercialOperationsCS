@@ -102,5 +102,25 @@ namespace App.Domain.BLL.Services
                 _userRepository.Delete(id);
             }
         }
+
+        public float? GetTotalBoughtValueById(long id)
+        {
+            return _userRepository.Find(id)?.BuyingOperations.Select(op => op.Value).Sum();
+        }
+
+        public float? GetTotalSoldValueById(long id)
+        {
+            return _userRepository.Find(id)?.SellingOperations.Select(op => op.Value).Sum();
+        }
+
+        public int? GetTotalBoughtAmountById(long id)
+        {
+            return _userRepository.Find(id)?.BuyingOperations.Select(op => op.ItemCount).Sum();
+        }
+
+        public int? GetTotalSoldAmountById(long id)
+        {
+            return _userRepository.Find(id)?.SellingOperations.Select(op => op.ItemCount).Sum();
+        }
     }
 }

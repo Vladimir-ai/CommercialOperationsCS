@@ -22,6 +22,9 @@ namespace App.Domain.WEB.Models
         public int MinAmount { get; set; } = 0;
         public int MaxAmount { get; set; } = int.MaxValue;
 
+        public DateTime StartDate { get; set; } = DateTime.MinValue;
+        public DateTime EndDate { get; set; } = DateTime.MaxValue;
+
         public void SortUsingOrder(ref List<ItemViewModel> itemList)
         {
             itemList = SortOrder switch

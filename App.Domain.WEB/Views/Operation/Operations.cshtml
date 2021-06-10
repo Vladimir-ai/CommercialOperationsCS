@@ -88,6 +88,22 @@
                 </div>
             </div>
 
+            @* <div class="form-row mb-2"> *@
+            @*     <div class="form-col"> *@
+            @*         <select id="Group" name="Group" class="form-control mx-2"> *@
+            @*             <option value="">Select Group Type</option> *@
+            @*             @foreach (var group in ViewData["AllGroups"] as string[]) *@
+            @*             { *@
+            @*                 @:<option value="@group" *@
+            @*                 @if (ViewData["CurrGroup"].Equals(group)) *@
+            @*                 { *@
+            @*                     @:selected *@
+            @*                 } *@
+            @*                 @:>@group</option> *@
+            @*             } *@
+            @*         </select> *@
+            @*         </div> *@
+            @* </div> *@
 
             <div class="form-row mb-2">
                 <div class="form-col mx-2">
@@ -99,7 +115,7 @@
             </div>
         </form>
     </div>
-    
+
     <div class="col-4">
         <div class="row py-5 lead">Total Selected Value: @ViewData["TotalValue"]</div>
         <div class="row lead">Total Selected Amount: @ViewData["TotalAmount"]</div>
@@ -112,11 +128,17 @@
     <th scope="col">
         <a asp-action="Operations"
            asp-route-sortOrder="@ViewData["IdSortParam"]"
-           asp-route-pageIndex="@(Model.PageIndex)"
            asp-route-itemNameFilter="@(string.Join(",", (ViewData["ItemNameFilter"] as string[])))"
            asp-route-catFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
            asp-route-sellUsrNameFilter="@ViewData["SellUserFilter"]"
            asp-route-buyUsrNameFilter="@ViewData["BuyUserFilter"]"
+           asp-route-MinAmount="@ViewData["MinAmount"]"
+           asp-route-MaxAmount="@ViewData["MaxAmount"]"
+           asp-route-MinValue="@ViewData["MinVal"]"
+           asp-route-MaxValue="@ViewData["MaxVal"]"
+           asp-route-StartDate="@ViewData["StartDate"]"
+           asp-route-EndDate="@ViewData["EndDate"]"
+           asp-route-pageIndex="@(Model.PageIndex)"
            asp-route-pageSize="@Model.PageSize">
             #
         </a>
@@ -129,6 +151,12 @@
            asp-route-catFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
            asp-route-sellUsrNameFilter="@ViewData["SellUserFilter"]"
            asp-route-buyUsrNameFilter="@ViewData["BuyUserFilter"]"
+           asp-route-MinAmount="@ViewData["MinAmount"]"
+           asp-route-MaxAmount="@ViewData["MaxAmount"]"
+           asp-route-MinValue="@ViewData["MinVal"]"
+           asp-route-MaxValue="@ViewData["MaxVal"]"
+           asp-route-StartDate="@ViewData["StartDate"]"
+           asp-route-EndDate="@ViewData["EndDate"]"
            asp-route-pageSize="@Model.PageSize">
             Item
         </a>
@@ -141,6 +169,12 @@
            asp-route-catFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
            asp-route-sellUsrNameFilter="@ViewData["SellUserFilter"]"
            asp-route-buyUsrNameFilter="@ViewData["BuyUserFilter"]"
+           asp-route-MinAmount="@ViewData["MinAmount"]"
+           asp-route-MaxAmount="@ViewData["MaxAmount"]"
+           asp-route-MinValue="@ViewData["MinVal"]"
+           asp-route-MaxValue="@ViewData["MaxVal"]"
+           asp-route-StartDate="@ViewData["StartDate"]"
+           asp-route-EndDate="@ViewData["EndDate"]"
            asp-route-pageSize="@Model.PageSize">
             Item Categories
         </a>
@@ -153,6 +187,12 @@
            asp-route-catFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
            asp-route-sellUsrNameFilter="@ViewData["SellUserFilter"]"
            asp-route-buyUsrNameFilter="@ViewData["BuyUserFilter"]"
+           asp-route-MinAmount="@ViewData["MinAmount"]"
+           asp-route-MaxAmount="@ViewData["MaxAmount"]"
+           asp-route-MinValue="@ViewData["MinVal"]"
+           asp-route-MaxValue="@ViewData["MaxVal"]"
+           asp-route-StartDate="@ViewData["StartDate"]"
+           asp-route-EndDate="@ViewData["EndDate"]"
            asp-route-pageSize="@Model.PageSize">
             Item Count
         </a>
@@ -165,6 +205,12 @@
            asp-route-catFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
            asp-route-sellUsrNameFilter="@ViewData["SellUserFilter"]"
            asp-route-buyUsrNameFilter="@ViewData["BuyUserFilter"]"
+           asp-route-MinAmount="@ViewData["MinAmount"]"
+           asp-route-MaxAmount="@ViewData["MaxAmount"]"
+           asp-route-MinValue="@ViewData["MinVal"]"
+           asp-route-MaxValue="@ViewData["MaxVal"]"
+           asp-route-StartDate="@ViewData["StartDate"]"
+           asp-route-EndDate="@ViewData["EndDate"]"
            asp-route-pageSize="@Model.PageSize">
             Value
         </a>
@@ -177,6 +223,12 @@
            asp-route-catFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
            asp-route-sellUsrNameFilter="@ViewData["SellUserFilter"]"
            asp-route-buyUsrNameFilter="@ViewData["BuyUserFilter"]"
+           asp-route-MinAmount="@ViewData["MinAmount"]"
+           asp-route-MaxAmount="@ViewData["MaxAmount"]"
+           asp-route-MinValue="@ViewData["MinVal"]"
+           asp-route-MaxValue="@ViewData["MaxVal"]"
+           asp-route-StartDate="@ViewData["StartDate"]"
+           asp-route-EndDate="@ViewData["EndDate"]"
            asp-route-pageSize="@Model.PageSize">
             Buying User
         </a>
@@ -189,23 +241,35 @@
            asp-route-catFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
            asp-route-sellUsrNameFilter="@ViewData["SellUserFilter"]"
            asp-route-buyUsrNameFilter="@ViewData["BuyUserFilter"]"
+           asp-route-MinAmount="@ViewData["MinAmount"]"
+           asp-route-MaxAmount="@ViewData["MaxAmount"]"
+           asp-route-MinValue="@ViewData["MinVal"]"
+           asp-route-MaxValue="@ViewData["MaxVal"]"
+           asp-route-StartDate="@ViewData["StartDate"]"
+           asp-route-EndDate="@ViewData["EndDate"]"
            asp-route-pageSize="@Model.PageSize">
             Selling User
         </a>
     </th>
     <th scope="col">
-            <a asp-action="Operations"
-               asp-route-sortOrder="@ViewData["DateSortParam"]"
-               asp-route-pageIndex="@(Model.PageIndex)"
-               asp-route-itemNameFilter="@(string.Join(",", (ViewData["ItemNameFilter"] as string[])))"
-               asp-route-catFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
-               asp-route-sellUsrNameFilter="@ViewData["SellUserFilter"]"
-               asp-route-buyUsrNameFilter="@ViewData["BuyUserFilter"]"
-               asp-route-pageSize="@Model.PageSize">
-                Date
-            </a>
-        </th>
-        
+        <a asp-action="Operations"
+           asp-route-sortOrder="@ViewData["DateSortParam"]"
+           asp-route-pageIndex="@(Model.PageIndex)"
+           asp-route-itemNameFilter="@(string.Join(",", (ViewData["ItemNameFilter"] as string[])))"
+           asp-route-catFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
+           asp-route-sellUsrNameFilter="@ViewData["SellUserFilter"]"
+           asp-route-buyUsrNameFilter="@ViewData["BuyUserFilter"]"
+           asp-route-MinAmount="@ViewData["MinAmount"]"
+           asp-route-MaxAmount="@ViewData["MaxAmount"]"
+           asp-route-MinValue="@ViewData["MinVal"]"
+           asp-route-MaxValue="@ViewData["MaxVal"]"
+           asp-route-StartDate="@ViewData["StartDate"]"
+           asp-route-EndDate="@ViewData["EndDate"]"
+           asp-route-pageSize="@Model.PageSize">
+            Date
+        </a>
+    </th>
+
     <th scope="col">Action</th>
     </thead>
 
@@ -241,7 +305,18 @@
         Add New Operation
     </button>
 
-    <a asp-route-download="true"
+    <a asp-action="Download"
+       asp-route-sortOrder="@ViewData["ItemCatSortParam"]"
+       asp-route-itemNameFilter="@(string.Join(",", (ViewData["ItemNameFilter"] as string[])))"
+       asp-route-catFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
+       asp-route-sellUsrNameFilter="@ViewData["SellUserFilter"]"
+       asp-route-buyUsrNameFilter="@ViewData["BuyUserFilter"]"
+       asp-route-MinAmount="@ViewData["MinAmount"]"
+       asp-route-MaxAmount="@ViewData["MaxAmount"]"
+       asp-route-MinValue="@ViewData["MinVal"]"
+       asp-route-MaxValue="@ViewData["MaxVal"]"
+       asp-route-StartDate="@ViewData["StartDate"]"
+       asp-route-EndDate="@ViewData["EndDate"]"
        class="btn btn-outline-primary">
         Download As ExcelFile
     </a>
@@ -261,6 +336,12 @@
            asp-route-catFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
            asp-route-sellUsrNameFilter="@ViewData["SellUserFilter"]"
            asp-route-buyUsrNameFilter="@ViewData["BuyUserFilter"]"
+           asp-route-MinAmount="@ViewData["MinAmount"]"
+           asp-route-MaxAmount="@ViewData["MaxAmount"]"
+           asp-route-MinValue="@ViewData["MinVal"]"
+           asp-route-MaxValue="@ViewData["MaxVal"]"
+           asp-route-StartDate="@ViewData["StartDate"]"
+           asp-route-EndDate="@ViewData["EndDate"]"
            asp-route-pageSize="@Model.PageSize"
            class="btn btn-outline-dark @prevDisabled">
             Previous
@@ -277,6 +358,12 @@
            asp-route-catFilter="@(string.Join(",", (ViewData["CatFilter"] as string[])))"
            asp-route-sellUsrNameFilter="@ViewData["SellUserFilter"]"
            asp-route-buyUsrNameFilter="@ViewData["BuyUserFilter"]"
+           asp-route-MinAmount="@ViewData["MinAmount"]"
+           asp-route-MaxAmount="@ViewData["MaxAmount"]"
+           asp-route-MinValue="@ViewData["MinVal"]"
+           asp-route-MaxValue="@ViewData["MaxVal"]"
+           asp-route-StartDate="@ViewData["StartDate"]"
+           asp-route-EndDate="@ViewData["EndDate"]"
            asp-route-pageSize="@Model.PageSize"
            class="btn btn-outline-dark @nextDisabled">
             Next
@@ -321,7 +408,7 @@
                             <option value="@user.Id">@(user.Name + " (" + user.UserType + ")")</option>
                         }
                     </select>
-                    
+
                     <label for="SellingDate" class="form-label">Date:</label>
                     <input id="SellingDate" name="SellingDate" class="form-control" type="date" required>
 

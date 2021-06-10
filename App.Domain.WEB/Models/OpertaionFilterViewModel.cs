@@ -8,7 +8,6 @@ namespace App.Domain.WEB.Models
     public class OperationFilterViewModel
     {
         [StringInterceptor] public string SortOrder { get; set; } = "";
-
         [StringArrayInterceptor] public string[] ItemNameFilter { get; set; } = Array.Empty<string>();
 
         [StringArrayInterceptor] public string[] CatFilter { get; set; } = Array.Empty<string>();
@@ -24,8 +23,8 @@ namespace App.Domain.WEB.Models
 
         public DateTime StartDate { get; set; } = DateTime.MinValue;
         public DateTime EndDate = DateTime.MaxValue;
-
-        public bool Group { get; set; }
+        
+        // public string Group { get; set; } = "";
 
         public void SortUsingOrder(ref List<OperationViewModel> operationList)
         {
@@ -45,10 +44,21 @@ namespace App.Domain.WEB.Models
                 "SellUser" => operationList.OrderBy(r => r.BuyingUser.Name).ToList(),
                 "sell_usr_desc" => operationList.OrderBy(r => r.BuyingUser.Name).ToList(),
                 "Date" => operationList.OrderBy(r => r.SellingDate).ToList(),
+                "date_desc" => operationList.OrderByDescending(r => r.SellingDate).ToList(),
                 _ => operationList
             };
         }
 
+        // public void ApplySort(ref List<OperationFilterViewModel> operationList)
+        // {
+        //     operationList = Group switch
+        //     {
+        //         "Buying User" => operationList.
+        //         _ => operationList
+        //     };
+        //
+        // }
+        
         public void SortByAmount(ref List<OperationViewModel> operationList)
         {
             operationList = operationList
