@@ -24,6 +24,9 @@ namespace App.Domain.WEB.Models
         public float MinSoldItemValue { get; set; } = 0;
         public float MaxSoldItemValue { get; set; } = float.MaxValue;
 
+        public DateTime StartDate { get; set; } = DateTime.MinValue;
+        public DateTime EndDate { get; set; } = DateTime.MaxValue;
+
 
         public void SortUsingOrder(ref List<UserViewModel> usersList)
         {
@@ -85,6 +88,7 @@ namespace App.Domain.WEB.Models
                 .Where(user => user.TotalSoldValue >= MinSoldItemValue)
                 .Where(user => user.TotalSoldValue <= MaxSoldItemValue)
                 .ToList();
+
         }
     }
 }

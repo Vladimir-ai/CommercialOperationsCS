@@ -22,10 +22,8 @@ namespace App.Domain.WEB.Models
         public float MaxValue { get; set; } = float.MaxValue;
 
         public DateTime StartDate { get; set; } = DateTime.MinValue;
-        public DateTime EndDate = DateTime.MaxValue;
+        public DateTime EndDate { get; set; } = DateTime.MaxValue;
         
-        // public string Group { get; set; } = "";
-
         public void SortUsingOrder(ref List<OperationViewModel> operationList)
         {
             operationList = SortOrder switch
@@ -48,17 +46,6 @@ namespace App.Domain.WEB.Models
                 _ => operationList
             };
         }
-
-        // public void ApplySort(ref List<OperationFilterViewModel> operationList)
-        // {
-        //     operationList = Group switch
-        //     {
-        //         "Buying User" => operationList.
-        //         _ => operationList
-        //     };
-        //
-        // }
-        
         public void SortByAmount(ref List<OperationViewModel> operationList)
         {
             operationList = operationList

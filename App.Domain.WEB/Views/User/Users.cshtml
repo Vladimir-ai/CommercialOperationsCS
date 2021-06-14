@@ -82,14 +82,24 @@
                 </div>
             </div>
 
-            <div class="form-row my-2">
+            <div class="form-row mb-2">
+                <div class="form-col mr-2">
+                    <input id="StartDate" name="StartDate" type="date" value="@ViewData["StartDate"]" class="form-control" placeholder="From Date"/>
+                </div>
+
+                <div class="form-col mr-2">
+                    <input id="EndDate" name="EndDate" type="date" value="@ViewData["End Date"]" class="form-control" placeholder="To Date"/>
+                </div>
+            </div>
+
+            <div class="form-row mb-2">
                 <div class="form-col mr-2">
                     <input id="pageSize" class="form-control" type="number" name="pageSize" placeholder="Page Size" min="5" value="@Model.PageSize"/>
                 </div>
 
             </div>
-            <div class="form-row my-2">
 
+            <div class="form-row my-2">
                 <div class="form-col">
                     <input type="submit" value="Search" class="btn btn-outline-dark"/>
                 </div>
@@ -99,200 +109,216 @@
             </div>
         </form>
     </div>
-    
-    
+
+
     <div class="col-4">
-            <div class="row py-5 lead">Total Selected Value: @ViewData["TotalValue"]</div>
-            <div class="row lead">Total Selected Amount: @ViewData["TotalAmount"]</div>
-        </div>
+        <div class="row py-5 lead">Total Selected Value: @ViewData["TotalValue"]</div>
+        <div class="row lead">Total Selected Amount: @ViewData["TotalAmount"]</div>
+    </div>
 </div>
 
 
 <table id="table" class="text-center table table-striped">
-    <thead class="thead-light">
-    <th scope="col">
-        <a asp-action="Users"
-           asp-route-sortOrder="@ViewData["IdSortParam"]"
-           asp-route-pageIndex="@(Model.PageIndex)"
-           asp-route-nameFilter="@ViewData["NameFilter"]"
-           asp-route-typeFilter="@ViewData["UserTypeFilter"]"
-           asp-route-addressFilter="@ViewData["AddressFilter"]"
-           asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
-           asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
-           asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
-           asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
-           asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
-           asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
-           asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
-           asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
-           asp-route-pageSize="@Model.PageSize">
-            #
-        </a>
-    </th>
-    <th scope="col">
-        <a asp-action="Users"
-           asp-route-sortOrder="@ViewData["NameSortParam"]"
-           asp-route-pageIndex="@(Model.PageIndex)"
-           asp-route-nameFilter="@ViewData["NameFilter"]"
-           asp-route-typeFilter="@ViewData["UserTypeFilter"]"
-           asp-route-addressFilter="@ViewData["AddressFilter"]"
-           asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
-           asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
-           asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
-           asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
-           asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
-           asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
-           asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
-           asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
-           asp-route-pageSize="@Model.PageSize">
-            Name
-        </a>
-    </th>
-    <th scope="col">
-        <a asp-action="Users"
-           asp-route-sortOrder="@ViewData["UserTypeSortParam"]"
-           asp-route-pageIndex="@(Model.PageIndex)"
-           asp-route-nameFilter="@ViewData["NameFilter"]"
-           asp-route-typeFilter="@ViewData["UserTypeFilter"]"
-           asp-route-addressFilter="@ViewData["AddressFilter"]"
-           asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
-           asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
-           asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
-           asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
-           asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
-           asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
-           asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
-           asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
-           asp-route-pageSize="@Model.PageSize">
-            User Type
-        </a>
-    </th>
-    <th scope="col">
-        <a asp-action="Users"
-           asp-route-sortOrder="@ViewData["AddressSortParam"]"
-           asp-route-pageIndex="@(Model.PageIndex)"
-           asp-route-nameFilter="@ViewData["NameFilter"]"
-           asp-route-typeFilter="@ViewData["UserTypeFilter"]"
-           asp-route-addressFilter="@ViewData["AddressFilter"]"
-           asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
-           asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
-           asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
-           asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
-           asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
-           asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
-           asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
-           asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
-           asp-route-pageSize="@Model.PageSize">
-            User Address
-        </a>
-    </th>
-    <th scope="col">
-        <a asp-action="Users"
-           asp-route-sortOrder="@ViewData["TotalBoughtValueSortParam"]"
-           asp-route-pageIndex="@(Model.PageIndex)"
-           asp-route-nameFilter="@ViewData["NameFilter"]"
-           asp-route-typeFilter="@ViewData["UserTypeFilter"]"
-           asp-route-addressFilter="@ViewData["AddressFilter"]"
-           asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
-           asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
-           asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
-           asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
-           asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
-           asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
-           asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
-           asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
-           asp-route-pageSize="@Model.PageSize">
-            Sum Bought
-        </a>
-    </th>
-    <th scope="col">
-        <a asp-action="Users"
-           asp-route-sortOrder="@ViewData["TotalSoldValueSortParam"]"
-           asp-route-pageIndex="@(Model.PageIndex)"
-           asp-route-nameFilter="@ViewData["NameFilter"]"
-           asp-route-typeFilter="@ViewData["UserTypeFilter"]"
-           asp-route-addressFilter="@ViewData["AddressFilter"]"
-           asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
-           asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
-           asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
-           asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
-           asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
-           asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
-           asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
-           asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
-           asp-route-pageSize="@Model.PageSize">
-            Sum Sold
-        </a>
-    </th>
-    <th scope="col">
-        <a asp-action="Users"
-           asp-route-sortOrder="@ViewData["TotalBoughtAmountSortParam"]"
-           asp-route-pageIndex="@(Model.PageIndex)"
-           asp-route-nameFilter="@ViewData["NameFilter"]"
-           asp-route-typeFilter="@ViewData["UserTypeFilter"]"
-           asp-route-addressFilter="@ViewData["AddressFilter"]"
-           asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
-           asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
-           asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
-           asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
-           asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
-           asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
-           asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
-           asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
-           asp-route-pageSize="@Model.PageSize">
-            Bought Amount
-        </a>
-    </th>
-    <th scope="col">
-        <a asp-action="Users"
-           asp-route-sortOrder="@ViewData["TotalSoldAmountSortParam"]"
-           asp-route-pageIndex="@(Model.PageIndex)"
-           asp-route-nameFilter="@ViewData["NameFilter"]"
-           asp-route-typeFilter="@ViewData["UserTypeFilter"]"
-           asp-route-addressFilter="@ViewData["AddressFilter"]"
-           asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
-           asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
-           asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
-           asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
-           asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
-           asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
-           asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
-           asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
-           asp-route-pageSize="@Model.PageSize">
-            Sold Amount
-        </a>
-    </th>
-    <th scope="col">Action</th>
-    </thead>
-    <tbody>
-    @foreach (var user in Model)
-    {
-        i++;
-        <tr>
-            <td>@i</td>
-            <td>@user.Name</td>
-            <td>@user.UserType</td>
-            <td>@user.Address.ToString()</td>
-            <td>@user.TotalBoughtValue</td>
-            <td>@user.TotalSoldValue</td>
-            <td>@user.TotalBoughtAmount</td>
-            <td>@user.TotalSoldAmount</td>
-            <td>
-                <button type="button" class="fill-modal btn btn-outline-primary" data-toggle="modal" value="@user.Id" data-target="#addingModal">
-                    Edit
-                </button>
+<thead class="thead-light">
+<th scope="col">
+    <a asp-action="Users"
+       asp-route-sortOrder="@ViewData["IdSortParam"]"
+       asp-route-pageIndex="@(Model.PageIndex)"
+       asp-route-nameFilter="@ViewData["NameFilter"]"
+       asp-route-typeFilter="@ViewData["UserTypeFilter"]"
+       asp-route-addressFilter="@ViewData["AddressFilter"]"
+       asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
+       asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
+       asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
+       asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
+       asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
+       asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
+       asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
+       asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
+       asp-route-StartDate="@ViewData["StartDate"]"
+       asp-route-EndDate="@ViewData["EndDate"]"
+       asp-route-pageSize="@Model.PageSize">
+        #
+    </a>
+</th>
+<th scope="col">
+    <a asp-action="Users"
+       asp-route-sortOrder="@ViewData["NameSortParam"]"
+       asp-route-pageIndex="@(Model.PageIndex)"
+       asp-route-nameFilter="@ViewData["NameFilter"]"
+       asp-route-typeFilter="@ViewData["UserTypeFilter"]"
+       asp-route-addressFilter="@ViewData["AddressFilter"]"
+       asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
+       asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
+       asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
+       asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
+       asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
+       asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
+       asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
+       asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
+       asp-route-StartDate="@ViewData["StartDate"]"
+       asp-route-EndDate="@ViewData["EndDate"]"
+       asp-route-pageSize="@Model.PageSize">
+        Name
+    </a>
+</th>
+<th scope="col">
+    <a asp-action="Users"
+       asp-route-sortOrder="@ViewData["UserTypeSortParam"]"
+       asp-route-pageIndex="@(Model.PageIndex)"
+       asp-route-nameFilter="@ViewData["NameFilter"]"
+       asp-route-typeFilter="@ViewData["UserTypeFilter"]"
+       asp-route-addressFilter="@ViewData["AddressFilter"]"
+       asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
+       asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
+       asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
+       asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
+       asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
+       asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
+       asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
+       asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
+       asp-route-StartDate="@ViewData["StartDate"]"
+       asp-route-EndDate="@ViewData["EndDate"]"
+       asp-route-pageSize="@Model.PageSize">
+        User Type
+    </a>
+</th>
+<th scope="col">
+    <a asp-action="Users"
+       asp-route-sortOrder="@ViewData["AddressSortParam"]"
+       asp-route-pageIndex="@(Model.PageIndex)"
+       asp-route-nameFilter="@ViewData["NameFilter"]"
+       asp-route-typeFilter="@ViewData["UserTypeFilter"]"
+       asp-route-addressFilter="@ViewData["AddressFilter"]"
+       asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
+       asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
+       asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
+       asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
+       asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
+       asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
+       asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
+       asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
+       asp-route-StartDate="@ViewData["StartDate"]"
+       asp-route-EndDate="@ViewData["EndDate"]"
+       asp-route-pageSize="@Model.PageSize">
+        User Address
+    </a>
+</th>
+<th scope="col">
+    <a asp-action="Users"
+       asp-route-sortOrder="@ViewData["TotalBoughtValueSortParam"]"
+       asp-route-pageIndex="@(Model.PageIndex)"
+       asp-route-nameFilter="@ViewData["NameFilter"]"
+       asp-route-typeFilter="@ViewData["UserTypeFilter"]"
+       asp-route-addressFilter="@ViewData["AddressFilter"]"
+       asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
+       asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
+       asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
+       asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
+       asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
+       asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
+       asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
+       asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
+       asp-route-StartDate="@ViewData["StartDate"]"
+       asp-route-EndDate="@ViewData["EndDate"]"
+       asp-route-pageSize="@Model.PageSize">
+        Sum Bought
+    </a>
+</th>
+<th scope="col">
+    <a asp-action="Users"
+       asp-route-sortOrder="@ViewData["TotalSoldValueSortParam"]"
+       asp-route-pageIndex="@(Model.PageIndex)"
+       asp-route-nameFilter="@ViewData["NameFilter"]"
+       asp-route-typeFilter="@ViewData["UserTypeFilter"]"
+       asp-route-addressFilter="@ViewData["AddressFilter"]"
+       asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
+       asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
+       asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
+       asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
+       asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
+       asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
+       asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
+       asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
+       asp-route-StartDate="@ViewData["StartDate"]"
+       asp-route-EndDate="@ViewData["EndDate"]"
+       asp-route-pageSize="@Model.PageSize">
+        Sum Sold
+    </a>
+</th>
+<th scope="col">
+    <a asp-action="Users"
+       asp-route-sortOrder="@ViewData["TotalBoughtAmountSortParam"]"
+       asp-route-pageIndex="@(Model.PageIndex)"
+       asp-route-nameFilter="@ViewData["NameFilter"]"
+       asp-route-typeFilter="@ViewData["UserTypeFilter"]"
+       asp-route-addressFilter="@ViewData["AddressFilter"]"
+       asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
+       asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
+       asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
+       asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
+       asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
+       asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
+       asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
+       asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
+       asp-route-StartDate="@ViewData["StartDate"]"
+       asp-route-EndDate="@ViewData["EndDate"]"
+       asp-route-pageSize="@Model.PageSize">
+        Bought Amount
+    </a>
+</th>
+<th scope="col">
+    <a asp-action="Users"
+       asp-route-sortOrder="@ViewData["TotalSoldAmountSortParam"]"
+       asp-route-pageIndex="@(Model.PageIndex)"
+       asp-route-nameFilter="@ViewData["NameFilter"]"
+       asp-route-typeFilter="@ViewData["UserTypeFilter"]"
+       asp-route-addressFilter="@ViewData["AddressFilter"]"
+       asp-route-MinBoughtItemAmount="@ViewData["TotalBoughtAmountMin"]"
+       asp-route-MaxBoughtItemAmount="@ViewData["TotalBoughtAmountMax"]"
+       asp-route-MinSoldItemAmount="@ViewData["TotalSoldAmountMin"]"
+       asp-route-MaxSoldItemAmount="@ViewData["TotalSoldAmountMax"]"
+       asp-route-MinBoughtItemValue="@ViewData["TotalBoughtValueMin"]"
+       asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
+       asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
+       asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
+       asp-route-StartDate="@ViewData["StartDate"]"
+       asp-route-EndDate="@ViewData["EndDate"]"
+       asp-route-pageSize="@Model.PageSize">
+        Sold Amount
+    </a>
+</th>
+<th scope="col">Action</th>
+</thead>
+<tbody>
+@foreach (var user in Model)
+{
+    i++;
+    <tr>
+        <td>@i</td>
+        <td>@user.Name</td>
+        <td>@user.UserType</td>
+        <td>@user.Address.ToString()</td>
+        <td>@user.TotalBoughtValue</td>
+        <td>@user.TotalSoldValue</td>
+        <td>@user.TotalBoughtAmount</td>
+        <td>@user.TotalSoldAmount</td>
+        <td>
+            <button type="button" class="fill-modal btn btn-outline-primary" data-toggle="modal" value="@user.Id" data-target="#addingModal">
+                Edit
+            </button>
 
-                <a class="btn btn-outline-info" asp-controller="Index" asp-action="UserStats" asp-route-id="@user.Id">
-                    Details
-                </a>
+            <a class="btn btn-outline-info" asp-controller="Index" asp-action="UserStats" asp-route-id="@user.Id">
+                Details
+            </a>
 
-                <a href="~/User/RemoveUser/?id=@user.Id" class="btn btn-outline-danger">
-                    Remove
-                </a>
-            </td>
-        </tr>
-    }
-    </tbody>
+            <a href="~/User/RemoveUser/?id=@user.Id" class="btn btn-outline-danger">
+                Remove
+            </a>
+        </td>
+    </tr>
+}
+</tbody>
 </table>
 
 
@@ -313,7 +339,8 @@
        asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
        asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
        asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
-
+       asp-route-StartDate="@ViewData["StartDate"]"
+       asp-route-EndDate="@ViewData["EndDate"]"
        class="btn btn-outline-primary">
         Download As ExcelFile
     </a>
@@ -340,6 +367,8 @@
            asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
            asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
            asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
+           asp-route-StartDate="@ViewData["StartDate"]"
+           asp-route-EndDate="@ViewData["EndDate"]"
            asp-route-pageSize="@Model.PageSize"
            class="btn btn-outline-dark @prevDisabled">
             Previous
@@ -363,6 +392,8 @@
            asp-route-MaxBoughtItemValue="@ViewData["TotalBoughtValueMax"]"
            asp-route-MinSoldItemValue="@ViewData["TotalSoldValueMin"]"
            asp-route-MaxSoldItemValue="@ViewData["TotalSoldValueMax"]"
+           asp-route-StartDate="@ViewData["StartDate"]"
+           asp-route-EndDate="@ViewData["EndDate"]"
            asp-route-pageSize="@Model.PageSize"
            class="btn btn-outline-dark @nextDisabled">
             Next

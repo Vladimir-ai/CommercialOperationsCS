@@ -1,4 +1,5 @@
 ﻿using App.Domain.BLL.DTO;
+using System;
 using System.Collections.Generic;
 
 namespace App.Domain.BLL.Interfaces
@@ -9,9 +10,9 @@ namespace App.Domain.BLL.Interfaces
 
         void Delete(long id);
 
-        float? GetTotalBoughtValueById(long id);
-        float? GetTotalSoldValueById(long id);
-        int? GetTotalBoughtAmountById(long id);
-        int? GetTotalSoldAmountById(long id);
+        float? GetTotalBoughtValueByIdAndDate(long id, DateTime startDate, DateTime endDate);
+        float? GetTotalSoldValueByIdAndDate(long id, DateTime startDate, DateTime endDate);
+        int? GetTotalBoughtAmountByIdAndDate(long id, DateTime startDate, DateTime endDate);
+        int? GetTotalSoldAmountByIdAndDate(long id, DateTime startDate, DateTime endDate);
     }
 }

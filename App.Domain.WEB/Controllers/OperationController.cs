@@ -164,8 +164,6 @@ namespace App.Domain.WEB.Controllers
             filter.SortByCatUsr(ref result);
             filter.SortUsingOrder(ref result);
             
-            
-            
             return result;
         }
         

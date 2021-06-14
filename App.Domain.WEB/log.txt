@@ -7481,3 +7481,120 @@ Showing info for items: page=1 with size=5, category filter= and sortOrder=
 Viewing info about all users: page=1 with pageSize=5
 Viewing info about all operations: pageIndex=1 with pageSize=5
 Viewing info about all users: page=1 with pageSize=5
+Using developer exception page
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\KrevedKO\Desktop\Linux\VSU\Dot Net\CommercialOperations\App.Domain.WEB
+Viewing info about all users: page=1 with pageSize=5
+Showing info for items: page=1 with size=5, category filter= and sortOrder=
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all users: page=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=2 with pageSize=5
+Using developer exception page
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\KrevedKO\Desktop\Linux\VSU\Dot Net\CommercialOperations\App.Domain.WEB
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all users: page=1 with pageSize=5
+Using developer exception page
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\KrevedKO\Desktop\Linux\VSU\Dot Net\CommercialOperations\App.Domain.WEB
+Viewing info about all users: page=1 with pageSize=5
+Viewing info about all users: page=1 with pageSize=5
+Viewing info about all users: page=2 with pageSize=5
+Viewing info about all users: page=1 with pageSize=5
+Using developer exception page
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\KrevedKO\Desktop\Linux\VSU\Dot Net\CommercialOperations\App.Domain.WEB
+Viewing info about all users: page=1 with pageSize=5
+Viewing info about all users: page=1 with pageSize=5
+Using developer exception page
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\KrevedKO\Desktop\Linux\VSU\Dot Net\CommercialOperations\App.Domain.WEB
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all users: page=1 with pageSize=5
+Showing info for items: page=1 with size=5, category filter= and sortOrder=
+Using developer exception page
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\KrevedKO\Desktop\Linux\VSU\Dot Net\CommercialOperations\App.Domain.WEB
+Showing info for items: page=1 with size=5, category filter= and sortOrder=
+Showing info for items: page=1 with size=5, category filter= and sortOrder=Name
+Showing info for items: page=1 with size=5, category filter= and sortOrder=name_desc
+Viewing info about all users: page=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Using developer exception page
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\KrevedKO\Desktop\Linux\VSU\Dot Net\CommercialOperations\App.Domain.WEB
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=2 with pageSize=5
+Using developer exception page
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\KrevedKO\Desktop\Linux\VSU\Dot Net\CommercialOperations\App.Domain.WEB
+Showing info for items: page=1 with size=5, category filter= and sortOrder=
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=2 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Saving xlsx file for operations
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=2 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Showing info for items: page=1 with size=5, category filter= and sortOrder=
+Showing info for items: page=2 with size=5, category filter= and sortOrder=
+Showing info for items: page=1 with size=5, category filter= and sortOrder=
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Showing info for items: page=1 with size=5, category filter= and sortOrder=
+Showing info for items: page=1 with size=5, category filter= and sortOrder=
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Saving xlsx file for operations
+Using developer exception page
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\KrevedKO\Desktop\Linux\VSU\Dot Net\CommercialOperations\App.Domain.WEB
+Using developer exception page
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\KrevedKO\Desktop\Linux\VSU\Dot Net\CommercialOperations\App.Domain.WEB
+Showing info for items: page=1 with size=5, category filter= and sortOrder=
+Viewing info about all users: page=1 with pageSize=5

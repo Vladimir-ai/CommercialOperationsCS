@@ -1,20 +1,13 @@
-using App.Domain.BLL.Infrastructure;
 using App.Domain.BLL.Interfaces;
 using App.Domain.BLL.Services;
 using Core.Interfaces;
-using Core.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using App.Domain.WEB.Utils;
 using System.Reflection;
 using Core.EF;
@@ -35,7 +28,8 @@ namespace App.Domain.WEB
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<MyContext>(options => options.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=mydb;Trusted_Connection=True;"));
+            //services.AddDbContext<MyContext>(options => options.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=mydb;Trusted_Connection=True;"));
+            services.AddDbContext<MyContext>(options => options.UseNpgsql("Host=localhost;Database=my_db;Username=postgres;Password=AjfDkjtC;"));
 
             services.AddAllGenericTypes(typeof(IRepository<>), new[]{typeof(MyContext).GetTypeInfo().Assembly});
            

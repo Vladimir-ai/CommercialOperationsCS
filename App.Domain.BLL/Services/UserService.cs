@@ -103,24 +103,37 @@ namespace App.Domain.BLL.Services
             }
         }
 
-        public float? GetTotalBoughtValueById(long id)
+        public float? GetTotalBoughtValueByIdAndDate(long id, DateTime startDate, DateTime endDate)
         {
-            return _userRepository.Find(id)?.BuyingOperations.Select(op => op.Value).Sum();
+            return _userRepository.Find(id)?.BuyingOperations
+                .Where(op => op.SellingDate >= startDate)
+                .Where(op => op.SellingDate <= endDate)
+                .Select(op => op.Value).Sum();
         }
 
-        public float? GetTotalSoldValueById(long id)
+        public float? GetTotalSoldValueByIdAndDate(long id, DateTime startDate, DateTime endDate)
         {
-            return _userRepository.Find(id)?.SellingOperations.Select(op => op.Value).Sum();
+            return _userRepository.Find(id)?.SellingOperations
+                .Where(op => op.SellingDate >= startDate)
+                .Where(op => op.SellingDate <= endDate)
+                .Select(op => op.Value).Sum();
         }
 
-        public int? GetTotalBoughtAmountById(long id)
+        public int? GetTotalBoughtAmountByIdAndDate(long id, DateTime startDate, DateTime endDate)
         {
-            return _userRepository.Find(id)?.BuyingOperations.Select(op => op.ItemCount).Sum();
+            return _userRepository.Find(id)?.BuyingOperations
+                .Where(op => op.SellingDate >= startDate)
+                .Where(op => op.SellingDate <= endDate)
+                .Select(op => op.ItemCount).Sum();
         }
 
-        public int? GetTotalSoldAmountById(long id)
+        public int? GetTotalSoldAmountByIdAndDate(long id, DateTime startDate, DateTime endDate)
         {
-            return _userRepository.Find(id)?.SellingOperations.Select(op => op.ItemCount).Sum();
+            return _userRepository.Find(id)?.SellingOperations
+                .Where(op => op.SellingDate >= startDate)
+                .Where(op => op.SellingDate <= endDate)
+                .Select(op => op.ItemCount).Sum();
         }
+
     }
 }

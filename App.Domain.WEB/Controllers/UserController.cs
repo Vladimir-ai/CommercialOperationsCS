@@ -66,6 +66,10 @@ namespace App.Domain.WEB.Controllers
             ViewData["TotalSoldAmountMin"] = filterViewModel.MinSoldItemAmount == 0 ? null : filterViewModel.MinSoldItemAmount;
             ViewData["TotalSoldAmountMax"] = filterViewModel.MaxSoldItemAmount == int.MaxValue ? null : filterViewModel.MaxSoldItemAmount;
             
+            ViewData["StartDate"] = filterViewModel.StartDate == DateTime.MinValue ? "" : filterViewModel.StartDate.ToString("yyyy-MM-dd");
+            ViewData["EndDate"] = filterViewModel.EndDate == DateTime.MaxValue ? "" : filterViewModel.EndDate.ToString("yyyy-MM-dd");
+
+            
             var res = _addressService.GetAll();
 
             ViewData["UserTypes"] = _userService.GetAvailableUserTypes();
@@ -134,8 +138,6 @@ namespace App.Domain.WEB.Controllers
             worksheet.Cell("N1").FormulaA1 = $"=SUM($I$2:$I${row})";
             worksheet.Cell("O1").FormulaA1 = $"=SUM($J$2:$J${row})";
             worksheet.Cell("P1").FormulaA1 = $"=SUM($K$2:$K${row})";
-            
-            
 
             var cd = new System.Net.Mime.ContentDisposition
             {
@@ -164,10 +166,10 @@ namespace App.Domain.WEB.Controllers
             result
                 .ForEach(user =>
                 {
-                    user.TotalBoughtAmount = _userService.GetTotalBoughtAmountById(user.Id) ?? 0;
-                    user.TotalSoldAmount = _userService.GetTotalSoldAmountById(user.Id) ?? 0;
-                    user.TotalBoughtValue = _userService.GetTotalBoughtValueById(user.Id) ?? 0;
-                    user.TotalSoldValue = _userService.GetTotalSoldValueById(user.Id) ?? 0;
+                    user.TotalBoughtAmount = _userService.GetTotalBoughtAmountByIdAndDate(user.Id, filterViewModel.StartDate, filterViewModel.EndDate) ?? 0;
+                    user.TotalSoldAmount = _userService.GetTotalSoldAmountByIdAndDate(user.Id, filterViewModel.StartDate, filterViewModel.EndDate) ?? 0;
+                    user.TotalBoughtValue = _userService.GetTotalBoughtValueByIdAndDate(user.Id, filterViewModel.StartDate, filterViewModel.EndDate) ?? 0;
+                    user.TotalSoldValue = _userService.GetTotalSoldValueByIdAndDate(user.Id, filterViewModel.StartDate, filterViewModel.EndDate) ?? 0;
                 });
             
             filterViewModel.ApplyFilter(ref result);
