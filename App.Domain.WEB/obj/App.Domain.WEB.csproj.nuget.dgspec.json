@@ -1,0 +1,219 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\App.Domain.WEB\\App.Domain.WEB.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\App.Domain.BLL\\App.Domain.BLL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\App.Domain.BLL\\App.Domain.BLL.csproj",
+        "projectName": "App.Domain.BLL",
+        "projectPath": "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\App.Domain.BLL\\App.Domain.BLL.csproj",
+        "packagesPath": "C:\\Users\\KrevedKO\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\App.Domain.BLL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\KrevedKO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\CommercialOperationsLib\\App.Domain.DAL.csproj": {
+                "projectPath": "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\CommercialOperationsLib\\App.Domain.DAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\App.Domain.WEB\\App.Domain.WEB.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\App.Domain.WEB\\App.Domain.WEB.csproj",
+        "projectName": "App.Domain.WEB",
+        "projectPath": "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\App.Domain.WEB\\App.Domain.WEB.csproj",
+        "packagesPath": "C:\\Users\\KrevedKO\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\App.Domain.WEB\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\KrevedKO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\App.Domain.BLL\\App.Domain.BLL.csproj": {
+                "projectPath": "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\App.Domain.BLL\\App.Domain.BLL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.95.4, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[5.0.7, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\CommercialOperationsLib\\App.Domain.DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\CommercialOperationsLib\\App.Domain.DAL.csproj",
+        "projectName": "Core",
+        "projectPath": "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\CommercialOperationsLib\\App.Domain.DAL.csproj",
+        "packagesPath": "C:\\Users\\KrevedKO\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\KrevedKO\\RiderProjects\\CommercialOperationsCS\\CommercialOperationsLib\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\KrevedKO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

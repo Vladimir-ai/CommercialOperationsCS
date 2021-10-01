@@ -1,0 +1,12 @@
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\CommercialOperationsLib\bin\Debug\net5.0\Core.deps.json
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\CommercialOperationsLib\bin\Debug\net5.0\Core.dll
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\CommercialOperationsLib\bin\Debug\net5.0\ref\Core.dll
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\CommercialOperationsLib\bin\Debug\net5.0\Core.pdb
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\CommercialOperationsLib\obj\Debug\net5.0\App.Domain.DAL.csprojAssemblyReference.cache
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\CommercialOperationsLib\obj\Debug\net5.0\App.Domain.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\CommercialOperationsLib\obj\Debug\net5.0\App.Domain.DAL.AssemblyInfoInputs.cache
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\CommercialOperationsLib\obj\Debug\net5.0\App.Domain.DAL.AssemblyInfo.cs
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\CommercialOperationsLib\obj\Debug\net5.0\App.Domain.DAL.csproj.CoreCompileInputs.cache
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\CommercialOperationsLib\obj\Debug\net5.0\Core.dll
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\CommercialOperationsLib\obj\Debug\net5.0\ref\Core.dll
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\CommercialOperationsLib\obj\Debug\net5.0\Core.pdb

@@ -1,0 +1,15 @@
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.BLL\bin\Debug\net5.0\App.Domain.BLL.deps.json
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.BLL\bin\Debug\net5.0\App.Domain.BLL.dll
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.BLL\bin\Debug\net5.0\ref\App.Domain.BLL.dll
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.BLL\bin\Debug\net5.0\App.Domain.BLL.pdb
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.BLL\bin\Debug\net5.0\Core.dll
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.BLL\bin\Debug\net5.0\Core.pdb
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.BLL\obj\Debug\net5.0\App.Domain.BLL.csprojAssemblyReference.cache
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.BLL\obj\Debug\net5.0\App.Domain.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.BLL\obj\Debug\net5.0\App.Domain.BLL.AssemblyInfoInputs.cache
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.BLL\obj\Debug\net5.0\App.Domain.BLL.AssemblyInfo.cs
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.BLL\obj\Debug\net5.0\App.Domain.BLL.csproj.CoreCompileInputs.cache
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.BLL\obj\Debug\net5.0\App.Domain.BLL.csproj.CopyComplete
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.BLL\obj\Debug\net5.0\App.Domain.BLL.dll
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.BLL\obj\Debug\net5.0\ref\App.Domain.BLL.dll
+C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.BLL\obj\Debug\net5.0\App.Domain.BLL.pdb
