@@ -7,13 +7,13 @@ namespace App.Domain.WEB.Models
 {
     public class OperationFilterViewModel
     {
-        [StringInterceptor] public string SortOrder { get; set; } = "";
-        [StringArrayInterceptor] public string[] ItemNameFilter { get; set; } = Array.Empty<string>();
+        public string SortOrder { get; set; } = "";
+        public string[] ItemNameFilter { get; set; } = Array.Empty<string>();
 
-        [StringArrayInterceptor] public string[] CatFilter { get; set; } = Array.Empty<string>();
+        public string[] CatFilter { get; set; } = Array.Empty<string>();
 
-        [StringInterceptor] public string SellUsrNameFilter { get; set; } = "";
-        [StringInterceptor] public string BuyUsrNameFilter { get; set; } = "";
+        public string SellUsrNameFilter { get; set; } = "";
+        public string BuyUsrNameFilter { get; set; } = "";
 
         public int MinAmount { get; set; } = 0;
         public int MaxAmount { get; set; } = int.MaxValue;

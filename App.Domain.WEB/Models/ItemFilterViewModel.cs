@@ -7,13 +7,10 @@ namespace App.Domain.WEB.Models
 {
     public class ItemFilterViewModel
     {
-        [StringInterceptor]
         public string SortOrder { get; set; } = "";
 
-        [StringInterceptor]
         public string NameFilter { get; set; } = "";
 
-        [StringArrayInterceptor]
         public string[] CatFilter { get; set; } = Array.Empty<string>();
 
         public float MinVal { get; set; } = 0;

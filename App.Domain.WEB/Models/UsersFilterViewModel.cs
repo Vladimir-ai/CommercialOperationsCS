@@ -7,10 +7,10 @@ namespace App.Domain.WEB.Models
 {
     public class UsersFilterViewModel
     {
-        [StringInterceptor] public string SortOrder { get; set; } = "";
-        [StringInterceptor] public string NameFilter { get; set; } = "";
-        [StringInterceptor] public string TypeFilter { get; set; } = "";
-        [StringInterceptor] public string AddressFilter { get; set; } = "";
+        public string SortOrder { get; set; } = "";
+        public string NameFilter { get; set; } = "";
+        public string TypeFilter { get; set; } = "";
+        public string AddressFilter { get; set; } = "";
 
         public int MinBoughtItemAmount { get; set; } = 0;
         public int MaxBoughtItemAmount { get; set; } = int.MaxValue;
