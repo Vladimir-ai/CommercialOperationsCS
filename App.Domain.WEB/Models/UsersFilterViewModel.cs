@@ -53,15 +53,15 @@ namespace App.Domain.WEB.Models
 
         public void ApplyFilter(ref List<UserViewModel> usersList)
         {
-            if (NameFilter.Length != 0)
+            if (!string.IsNullOrEmpty(NameFilter))
                 usersList = usersList
                     .FindAll(user => user
                         .Name.Contains(NameFilter, StringComparison.OrdinalIgnoreCase));
 
-            if (TypeFilter.Length != 0)
+            if (!string.IsNullOrEmpty(TypeFilter))
                 usersList = usersList.FindAll(user => user.UserType.Contains(TypeFilter));
 
-            if (AddressFilter.Length != 0)
+            if (!string.IsNullOrEmpty(AddressFilter))
                 usersList = usersList
                     .FindAll(user => user.Address.ToString()
                         .Contains(AddressFilter, StringComparison.OrdinalIgnoreCase));

@@ -7610,3 +7610,53 @@ Adding new item
 item with id 0 has changed
 Showing info for items: page=1 with size=5, category filter= and sortOrder=
 An unhandled exception has occurred while executing the request.
+Using developer exception page
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.WEB
+Showing info for items: page=1 with size=5, category filter=awdaw and sortOrder=
+Showing info for items: page=1 with size=5, category filter=awdaw and sortOrder=
+Viewing info about all users: page=1 with pageSize=5
+An unhandled exception has occurred while executing the request.
+Using developer exception page
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.WEB
+Viewing info about all users: page=1 with pageSize=5
+An unhandled exception has occurred while executing the request.
+Using developer exception page
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.WEB
+Viewing info about all users: page=1 with pageSize=5
+Viewing info about all users: page=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+An unhandled exception has occurred while executing the request.
+Using developer exception page
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.WEB
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5
+Viewing info about all users: page=1 with pageSize=5
+Viewing info about all users: page=1 with pageSize=5
+Showing info for items: page=1 with size=5, category filter= and sortOrder=
+Showing info for items: page=1 with size=5, category filter= and sortOrder=
+Showing info for items: page=1 with size=5, category filter= and sortOrder=
+Using developer exception page
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\KrevedKO\RiderProjects\CommercialOperationsCS\App.Domain.WEB
+Showing info for items: page=1 with size=5, category filter= and sortOrder=
+Viewing info about all users: page=1 with pageSize=5
+Viewing info about all operations: pageIndex=1 with pageSize=5

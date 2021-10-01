@@ -41,7 +41,8 @@ namespace App.Domain.WEB.Models
 
         public void FilterByValue(ref List<ItemViewModel> itemList)
         {
-            if (!NameFilter.Equals(""))
+
+            if (NameFilter != null && !NameFilter.Equals(""))
                 itemList = itemList.FindAll(item =>
                     item.Name
                         .Contains(NameFilter,

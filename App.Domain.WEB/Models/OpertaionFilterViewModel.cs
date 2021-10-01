@@ -65,19 +65,19 @@ namespace App.Domain.WEB.Models
         }
         public void SortByCatUsr(ref List<OperationViewModel> operationList)
         {
-            if (ItemNameFilter.Length > 0)
+            if (ItemNameFilter != null && ItemNameFilter.Length > 0)
                 operationList = operationList.Where(oper =>
                     ItemNameFilter.Contains(oper.Item.Name)).ToList();
 
-            if (BuyUsrNameFilter.Length > 0)
+            if (!string.IsNullOrEmpty(BuyUsrNameFilter))
                 operationList = operationList.Where(oper =>
                     oper.BuyingUser.Name.Contains(BuyUsrNameFilter)).ToList();
 
-            if (SellUsrNameFilter.Length != 0)
+            if (!string.IsNullOrEmpty(SellUsrNameFilter))
                 operationList = operationList.Where(oper =>
                     oper.SellingUser.Name.Contains(SellUsrNameFilter)).ToList();
 
-            if (CatFilter.Length > 0)
+            if (CatFilter != null && CatFilter.Length > 0)
                 operationList = operationList.Where(oper =>
                     oper.Item.Categories.Select(cat => cat.Name)
                         .Intersect(CatFilter).Any()).ToList();
